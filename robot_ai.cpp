@@ -50,6 +50,8 @@ const int yd3[4]={ 0, 1, 0, 1};
 const int dangle[4]={0,90,180,270};
 
 
+extern FILE *debug_fp;
+
 void robot_zone(Vector pos,int *x,int *y,int *dx,int *dy)
 {
 	*x=int((pos.x-0.5)/0.5);
@@ -108,7 +110,10 @@ void NETHER::AI_precomputations(void)
 		while(l.Iterate(b)) {
 			x=int(b->pos.x/0.5);
 			y=int(b->pos.y/0.5);
-			fill_zone(discreetmap,map_w*2,T_BUILDING,x,y,2,2);
+			if (b->type == B_WALL1 || b->type == B_WALL2 || b->type == B_WALL3 || b->type == B_WALL5)
+				fill_zone(discreetmap,map_w*2,T_LOWBUILDING,x,y,2,2);
+			else
+				fill_zone(discreetmap,map_w*2,T_BUILDING,x,y,2,2);
 		} /* while */ 
 	}
 } /* NETHER::AI_precomputations */ 
@@ -312,6 +317,11 @@ int NETHER::AI_searchengine(Vector pos,int angle,int goaltype,Vector goalpos,int
 	int offs;
 	int x,y,dx,dy;
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Expanding de search tree\n");
+	fflush(debug_fp);
+#endif
+
 	/* Expand the search tree: */ 
 	robot_zone(pos,&x,&y,&dx,&dy);
 
@@ -324,6 +334,11 @@ int NETHER::AI_searchengine(Vector pos,int angle,int goaltype,Vector goalpos,int
 	searchmap[offs]->newpos=pos;
 	searchmap[offs]->deadend=false;
 	AI_expandoperators(x,y,angle,traction,y*(map_w*2)+x,0,depth);
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Expanding de search tree finished\n");
+	fflush(debug_fp);
+#endif
 
 
 	/* ADVANCE PROGRAM: */ 
@@ -440,6 +455,11 @@ int NETHER::AI_searchengine(Vector pos,int angle,int goaltype,Vector goalpos,int
 		bool first=true;
 		AI_OPERATOR *op,*bestop=0;
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Search engine for CAPTURE START\n");
+	fflush(debug_fp);
+#endif
+
 		for(i=-depth;i<depth;i++) {
 			for(j=-depth;j<depth;j++) {
 				if ((x+i)>=0 && (x+i)<(map_w*2) &&
@@ -461,6 +481,11 @@ int NETHER::AI_searchengine(Vector pos,int angle,int goaltype,Vector goalpos,int
 				} /* if */ 
 			} /* for */ 
 		} /* for */ 
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Search engine for CAPTURE FINISHED\n");
+	fflush(debug_fp);
+#endif
 
 		if (bestop!=0) {
 			int rop;
@@ -683,16 +708,31 @@ int NETHER::AI_program_capture(int goal,Vector *program_goal,Vector pos,int angl
 	int type;
 	List<AI_OPERATOR> l;
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"AI_program_capture START\n");
+	fflush(debug_fp);
+#endif
+
 	op=AI_program_stopdefend(program_goal,pos,angle,traction,electronics,player,pieces);
 	if (op!=ROBOTOP_NONE) return op;
 
 	type=AI_killrobot(pos);
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Searching available operators\n");
+	fflush(debug_fp);
+#endif
 
 	AI_availableoperators(pos,angle,traction,&l);
 
 	if (!l.EmptyP()) {
 		/* Choose one operator: */ 
 		AI_OPERATOR *aiop;
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Seeking a goal\n");
+	fflush(debug_fp);
+#endif
 
 		{
 			/* Seek a goal: */ 
@@ -749,6 +789,11 @@ int NETHER::AI_program_capture(int goal,Vector *program_goal,Vector pos,int angl
 			} /* while */ 
 		} 
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Searhing a plan to reach the goal\n");
+	fflush(debug_fp);
+#endif
+
 		if (program_goal->x!=-1 &&
 			(*program_goal)!=pos) {
 			if (electronics) {
@@ -768,6 +813,11 @@ int NETHER::AI_program_capture(int goal,Vector *program_goal,Vector pos,int angl
 	/* Reconstruct the decreet map: */ 
 	if (type==T_ROBOT) AI_newrobot(pos,0);
 				  else AI_newrobot(pos,1);
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"AI_program_capture FINISHED\n");
+	fflush(debug_fp);
+#endif
 
 	return op;
 } /* NETHER::AI_program_capture */ 
@@ -972,7 +1022,7 @@ int NETHER::AI_program_destroy(int goal,Vector *program_goal,Vector pos,int angl
 						for(k=1;!collided && k<int((persistence*BULLET_SPEED)/0.5);k++) {
 							if (x+i+k<0 || x+i+k>=map_w*2 ||
 								y+j<0 || y+j>=map_h*2 ||
-								discreetmap[(y+j)*(map_w*2)+(x+i+k)]>3) {
+								AI_isbulletproof((y+j)*(map_w*2)+(x+i+k))) {
 								collided=true;
 							} else {
 								atackmap[(y+j)*(map_w*2)+(x+i+k)]|=4;
@@ -983,7 +1033,7 @@ int NETHER::AI_program_destroy(int goal,Vector *program_goal,Vector pos,int angl
 						for(k=1;!collided && k<int((persistence*BULLET_SPEED)/0.5);k++) {
 							if (x+i-k<0 || x+i-k>=map_w*2 ||
 								y+j<0 || y+j>=map_h*2 ||
-								discreetmap[(y+j)*(map_w*2)+(x+i-k)]>3) {
+								AI_isbulletproof((y+j)*(map_w*2)+(x+i-k))) {
 								collided=true;
 							} else {
 								atackmap[(y+j)*(map_w*2)+(x+i-k)]|=1;
@@ -994,7 +1044,7 @@ int NETHER::AI_program_destroy(int goal,Vector *program_goal,Vector pos,int angl
 						for(k=1;!collided && k<int((persistence*BULLET_SPEED)/0.5);k++) {
 							if (x+i<0 || x+i>=map_w*2 ||
 								y+j+k<0 || y+j+k>=map_h*2 ||
-								discreetmap[(y+j+k)*(map_w*2)+(x+i)]>3) {
+								AI_isbulletproof((y+j+k)*(map_w*2)+(x+i))) {
 								collided=true;
 							} else {
 								atackmap[(y+j+k)*(map_w*2)+(x+i)]|=8;
@@ -1005,7 +1055,7 @@ int NETHER::AI_program_destroy(int goal,Vector *program_goal,Vector pos,int angl
 						for(k=1;!collided && k<int((persistence*BULLET_SPEED)/0.5);k++) {
 							if (x+i<0 || x+i>=map_w*2 ||
 								y+j-k<0 || y+j-k>=map_h*2 ||
-								discreetmap[(y+j-k)*(map_w*2)+(x+i)]>3) {
+								AI_isbulletproof((y+j-k)*(map_w*2)+(x+i))) {
 								collided=true;
 							} else {
 								atackmap[(y+j-k)*(map_w*2)+(x+i)]|=2;
@@ -1127,7 +1177,7 @@ int NETHER::AI_program_stopdefend(Vector *program_goal,Vector pos,int angle,int 
 					for(k=1;!collided && k<int((persistence*BULLET_SPEED)/0.5);k++) {
 						if (x+i+k<0 || x+i+k>=map_w*2 ||
 							y+j<0 || y+j>=map_h*2 ||
-							discreetmap[(y+j)*(map_w*2)+(x+i+k)]>3) {
+							AI_isbulletproof((y+j)*(map_w*2)+(x+i+k))) {
 							collided=true;
 						} else {
 							atackmap[(y+j)*(map_w*2)+(x+i+k)]|=4;
@@ -1138,7 +1188,7 @@ int NETHER::AI_program_stopdefend(Vector *program_goal,Vector pos,int angle,int 
 					for(k=1;!collided && k<int((persistence*BULLET_SPEED)/0.5);k++) {
 						if (x+i-k<0 || x+i-k>=map_w*2 ||
 							y+j<0 || y+j>=map_h*2 ||
-							discreetmap[(y+j)*(map_w*2)+(x+i-k)]>3) {
+							AI_isbulletproof((y+j)*(map_w*2)+(x+i-k))) {
 							collided=true;
 						} else {
 							atackmap[(y+j)*(map_w*2)+(x+i-k)]|=1;
@@ -1149,7 +1199,7 @@ int NETHER::AI_program_stopdefend(Vector *program_goal,Vector pos,int angle,int 
 					for(k=1;!collided && k<int((persistence*BULLET_SPEED)/0.5);k++) {
 						if (x+i<0 || x+i>=map_w*2 ||
 							y+j+k<0 || y+j+k>=map_h*2 ||
-							discreetmap[(y+j+k)*(map_w*2)+(x+i)]>3) {
+							AI_isbulletproof((y+j+k)*(map_w*2)+(x+i))) {
 							collided=true;
 						} else {
 							atackmap[(y+j+k)*(map_w*2)+(x+i)]|=8;
@@ -1160,7 +1210,7 @@ int NETHER::AI_program_stopdefend(Vector *program_goal,Vector pos,int angle,int 
 					for(k=1;!collided && k<int((persistence*BULLET_SPEED)/0.5);k++) {
 						if (x+i<0 || x+i>=map_w*2 ||
 							y+j-k<0 || y+j-k>=map_h*2 ||
-							discreetmap[(y+j-k)*(map_w*2)+(x+i)]>3) {
+							AI_isbulletproof((y+j-k)*(map_w*2)+(x+i))) {
 							collided=true;
 						} else {
 							atackmap[(y+j-k)*(map_w*2)+(x+i)]|=2;
@@ -1234,6 +1284,35 @@ int NETHER::AI_program_stopdefend(Vector *program_goal,Vector pos,int angle,int 
 	return op;
 } /* NETHER::AI_program_stopdefend */ 
 
+bool NETHER::AI_isbulletproof(int discreetmappos)
+{
+	switch(discreetmap[discreetmappos])
+	{
+	case T_GRASS:
+		return false;
+	case T_SAND:
+		return false;
+	case T_MOUNTAINS:
+		return false;
+	case T_HOLE:
+		return false;
+	case T_LOWBUILDING:
+		return false;
+	case T_BUILDING:
+		return true;
+	case T_SHIP:
+		return false;
+	case T_ROBOT:
+		return true;
+	case T_EROBOT:
+		return true;
+	case T_OUT:
+		return true;
+	default:
+		return true;
+	}
+	//return (discreetmap[discreetmappos]>3 && discreetmap[discreetmappos]!=9);
+} /* NETHER::AI_isbulletproof */
 
 void NETHER::AI_rankoperators_advance(List<AI_OPERATOR> *l)
 {
@@ -1302,6 +1381,19 @@ void NETHER::AI_rankoperators_capture(List<AI_OPERATOR> *l,Vector goal)
 	AI_OPERATOR *op1,*op2;
 	LLink<AI_OPERATOR> *p1,*p2;
 	bool changes;
+	float dist1 = 0;
+	float dist2 = 0;
+	int c1,c2;
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Rank operators START\n");
+	fflush(debug_fp);
+#endif
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Rank operators START\n");
+	fflush(debug_fp);
+#endif
 	
 	/* Bubble sort: */ 
 	do {
@@ -1314,12 +1406,18 @@ void NETHER::AI_rankoperators_capture(List<AI_OPERATOR> *l,Vector goal)
 			if (p1!=0 && p2!=0) {
 				op1=p1->GetObj();
 				op2=p2->GetObj();
-				float dist1 = (op1->newpos-goal).norma();
-				float dist2 = (op2->newpos-goal).norma();
-				float cost1 = op1->cost;
-				float cost2 = op2->cost;
-				if ((dist2<dist1) ||
-					(dist2==dist1 && cost2<cost1)) {
+				dist1 = (op1->newpos-goal).norma();
+				dist2 = (op2->newpos-goal).norma();
+				c1=(0.1)<(dist1-dist2);
+				c2=0;
+				if ((0.1)>(dist1-dist2) &&
+					(-0.1)<(dist1-dist2)) c2=op2->cost<op1->cost;
+				if (c1 || c2) {
+
+#ifdef _WRITE_REPORT_
+		fprintf(debug_fp,"Change: (%.16f,%i) <> (%.16f,%i) %i %i\n",dist1,op1->cost,dist2,op2->cost,c1,c2);
+		fflush(debug_fp);
+#endif
 					p1->Setobj(op2);
 					p2->Setobj(op1);
 					changes=true;
@@ -1328,6 +1426,12 @@ void NETHER::AI_rankoperators_capture(List<AI_OPERATOR> *l,Vector goal)
 			l->Next();
 		} /* while */ 
 	}while(changes);
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Rank operators FINISHED\n");
+	fflush(debug_fp);
+#endif
+
 } /* NETHER::AI_rankoperators_capture */ 
 
 

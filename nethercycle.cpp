@@ -28,20 +28,33 @@
 extern int detaillevel;
 extern int frames_per_sec;
 extern bool fullscreen;
-extern bool shadows;
+extern int shadows;
 extern bool sound;
 extern int up_key,down_key,left_key,right_key,fire_key,pause_key;
 extern int level;
 extern float MINY,MAXY,MINX,MAXX;
 
 
+extern FILE *debug_fp;
+
 bool NETHER::cycle(unsigned char *keyboard)
 {
-	if (keyboard[SDLK_PAGEUP]) {
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"PLAY CYCLE STARTS\n");
+	fflush(debug_fp);
+#endif
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Recomputing statistics\n");
+	fflush(debug_fp);
+#endif
+
+	if (keyboard[SDLK_PAGEUP] || keyboard[SDLK_KP_MINUS]) {
 		zoom*=1.1;
-		if (zoom>4) zoom=4;
+		if (zoom>8) zoom=8;
 	} /* if */ 
-	if (keyboard[SDLK_PAGEDOWN]) {
+	if (keyboard[SDLK_PAGEDOWN] || keyboard[SDLK_KP_PLUS]) {
 		zoom/=1.1;
 		if (zoom<0.5) zoom=0.5;
 	} /* if */ 
@@ -102,6 +115,11 @@ bool NETHER::cycle(unsigned char *keyboard)
 		recomputestatistics=false;
 	} /* if */ 
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Starting enemy AI\n");
+	fflush(debug_fp);
+#endif
+
 	/* ENEMY Artificial Intelligence: */ 
 	if (second==0) {
 		if (level==0 && (hour&0x01)==0 && minute==0) AI_enemy();
@@ -109,10 +127,19 @@ bool NETHER::cycle(unsigned char *keyboard)
 		if (level>=2 && (minute==0 || minute==30)) AI_enemy();
 	} /* if */ 
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Starting GAME CYCLE\n");
+	fflush(debug_fp);
+#endif
+
 	/* GAME Cycle: */ 
 	{
 		shiplanded=false;
-
+		
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Menu\n");
+	fflush(debug_fp);
+#endif
 		switch(act_menu) {
 		case GENERAL_MENU:
 			/* Free movement of the ship through the map: */ 
@@ -194,16 +221,16 @@ bool NETHER::cycle(unsigned char *keyboard)
 				if ((int(shipp.y*8)%4)==0) ship_op2=OP_NONE;
 				if ((int(shipp.z*8)%4)==0) ship_op3=OP_NONE;
 
-				if (keyboard[left_key]) {
+				if (keyboard[up_key]) {
 					ship_op=OP_LEFT;
 				} /* if */ 
-				if (keyboard[right_key]) {
+				if (keyboard[down_key]) {
 					ship_op=OP_RIGHT;
 				} /* if */ 
-				if (keyboard[up_key]) {
+				if (keyboard[right_key]) {
 					ship_op2=OP_FORWARD;
 				} /* if */ 
-				if (keyboard[down_key]) {
+				if (keyboard[left_key]) {
 					ship_op2=OP_BACKWARD;
 				} /* if */ 
 				if (keyboard[fire_key]) {
@@ -486,7 +513,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 
 						killmenu(ORDERS_MENU);
 						newmenu(ROBOT_MENU);
-						act_button=ROBOT2_BUTTON;
+						act_button=ROBOT4_BUTTON;
 						if (S_select!=0 && sound) Mix_Volume(Mix_PlayChannel(-1,S_select,0),128);
 						break;
 					case ORDERS2_BUTTON:
@@ -550,7 +577,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 
 					killmenu(SELECTDISTANCE_MENU);
 					newmenu(ROBOT_MENU);
-					act_button=ROBOT2_BUTTON;
+					act_button=ROBOT4_BUTTON;
 					if (S_select!=0 && sound) Mix_Volume(Mix_PlayChannel(-1,S_select,0),128);
 				} /* if */ 
 			}
@@ -609,7 +636,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 							controlled->pieces[2]) {
 							killmenu(TARGETD_MENU);
 							newmenu(ROBOT_MENU);
-							act_button=ROBOT2_BUTTON;
+							act_button=ROBOT4_BUTTON;
 							controlled->program=PROGRAM_DESTROY;
 							controlled->program_parameter=P_PARAM_ROBOTS;
 							controlled->program_goal=Vector(-1,-1,-1);
@@ -623,7 +650,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 						if (controlled->pieces[3]) {
 							killmenu(TARGETD_MENU);
 							newmenu(ROBOT_MENU);
-							act_button=ROBOT2_BUTTON;
+							act_button=ROBOT4_BUTTON;
 							controlled->program=PROGRAM_DESTROY;
 							controlled->program_parameter=P_PARAM_EFACTORIES;
 							controlled->program_goal=Vector(-1,-1,-1);
@@ -637,7 +664,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 						if (controlled->pieces[3]) {
 							killmenu(TARGETD_MENU);
 							newmenu(ROBOT_MENU);
-							act_button=ROBOT2_BUTTON;
+							act_button=ROBOT4_BUTTON;
 							controlled->program=PROGRAM_DESTROY;
 							controlled->program_parameter=P_PARAM_WARBASES;
 							controlled->program_goal=Vector(-1,-1,-1);
@@ -702,7 +729,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 					case TARGET1_BUTTON:
 						killmenu(TARGETC_MENU);
 						newmenu(ROBOT_MENU);
-						act_button=ROBOT2_BUTTON;
+						act_button=ROBOT4_BUTTON;
 						controlled->program=PROGRAM_CAPTURE;
 						controlled->program_parameter=P_PARAM_NFACTORIES;
 						controlled->program_goal=Vector(-1,-1,-1);
@@ -711,7 +738,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 					case TARGET2_BUTTON:
 						killmenu(TARGETC_MENU);
 						newmenu(ROBOT_MENU);
-						act_button=ROBOT2_BUTTON;
+						act_button=ROBOT4_BUTTON;
 						controlled->program=PROGRAM_CAPTURE;
 						controlled->program_parameter=P_PARAM_EFACTORIES;
 						controlled->program_goal=Vector(-1,-1,-1);
@@ -720,7 +747,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 					case TARGET3_BUTTON:
 						killmenu(TARGETC_MENU);
 						newmenu(ROBOT_MENU);
-						act_button=ROBOT2_BUTTON;
+						act_button=ROBOT4_BUTTON;
 						controlled->program=PROGRAM_CAPTURE;
 						controlled->program_parameter=P_PARAM_WARBASES;
 						controlled->program_goal=Vector(-1,-1,-1);
@@ -731,6 +758,12 @@ bool NETHER::cycle(unsigned char *keyboard)
 			}
 			break;
 		} /* switch */ 
+
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Viewport\n");
+	fflush(debug_fp);
+#endif
 
 		viewp.x=shipp.x+0.5;
 		viewp.y=shipp.y+0.5;
@@ -754,6 +787,11 @@ bool NETHER::cycle(unsigned char *keyboard)
 				if (viewp.y<3*zoom) viewp.y=map_h/2; 
 			} /* if */ 
 		} /* if */ 
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Resources\n");
+	fflush(debug_fp);
+#endif
 
 		{
 			STATUSBUTTON *timeb;
@@ -808,6 +846,11 @@ bool NETHER::cycle(unsigned char *keyboard)
 			} /* if */ 
 		}
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Ship landing\n");
+	fflush(debug_fp);
+#endif
+
 		/* Test if the ship has landed over a Factory: */ 
 		{
 			List<BUILDING> l;
@@ -819,7 +862,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 				if (b->type==B_WARBASE && b->owner==1 && 
 					shipp.x==b->pos.x && shipp.y==b->pos.y && shiplanded) {
 					game_state=STATE_CONSTRUCTION;
-					construction_pointer=0;
+					construction_pointer=20;
 					construction[0]=false;
 					construction[1]=false;
 					construction[2]=false;
@@ -864,6 +907,11 @@ bool NETHER::cycle(unsigned char *keyboard)
 			} /* while */ 
 		} /* if */ 
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Robots\n");
+	fflush(debug_fp);
+#endif
+
 		/* Robot cycles: */ 
 		{
 			int i;
@@ -875,10 +923,21 @@ bool NETHER::cycle(unsigned char *keyboard)
 			int terrain;
 			
 			for(i=0;i<2;i++) {
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Player %i robots\n",i);
+	fflush(debug_fp);
+#endif
+
 				l.Instance(robots[i]);
 				l.Rewind();
 				while(l.Iterate(r)) {
 					/* Robot cycle: */ 
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"START ROBOT\n");
+	fflush(debug_fp);
+#endif
 					
 					/* Animations: */ 
 					if (r->electronics_state!=0) {
@@ -899,6 +958,11 @@ bool NETHER::cycle(unsigned char *keyboard)
 					minz=MapMaxZ(x,y);
 					terrain=WorseMapTerrain(x,y);
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Avoid robot deadlock\n");
+	fflush(debug_fp);
+#endif
+
 					/* Avoid that a Robot can walk agains another and they both get stuck: */ 
 					if (r->op==ROBOTOP_FORWARD &&
 						(int(r->pos.x*256)%128)==0 &&
@@ -917,8 +981,14 @@ bool NETHER::cycle(unsigned char *keyboard)
 							if (AI_WorseMapTerrain(int((r->pos.x-0.5)/0.5),int((r->pos.y-1.0)/0.5),2,1)>T_HOLE) r->op=ROBOTOP_NONE;
 							break;
 						} /* switch */ 
+						if (r->op==ROBOTOP_NONE && r->program==PROGRAM_FORWARD)
+							r->program=PROGRAM_STOPDEFEND;
 					} /* if */ 
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"ROBOT COMMAND: %i\n",r->op);
+	fflush(debug_fp);
+#endif
 					if (r->op==ROBOTOP_FORWARD) {
 						float speed=RobotSpeed(r->traction,terrain);
 
@@ -1135,11 +1205,17 @@ bool NETHER::cycle(unsigned char *keyboard)
 
 						/* Follow ROBOT program: */ 
 						if (r->op==ROBOTOP_NONE && !r->shipover) {
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Robot program: %i\n",r->program);
+	fflush(debug_fp);
+#endif
 							switch(r->program) {
 							case PROGRAM_NONE:
 								break;
 							case PROGRAM_FORWARD:
 								r->op=ROBOTOP_FORWARD;
+								r->program_parameter--;
+								if (r->program_parameter==0) r->program=PROGRAM_STOPDEFEND;
 								break;
 							case PROGRAM_STOPDEFEND:
 								r->op=AI_program_stopdefend(&(r->program_goal),r->pos,r->angle,r->traction,r->pieces[4],i+1,r->pieces);
@@ -1171,7 +1247,11 @@ bool NETHER::cycle(unsigned char *keyboard)
 						if (r->op==ROBOTOP_NONE && r->shipover &&
 							(act_menu==DIRECTCONTROL_MENU ||
 							 act_menu==DIRECTCONTROL2_MENU)) {
-							if (keyboard[right_key]) {
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"User command\n",i);
+	fflush(debug_fp);
+#endif
+							if (keyboard[down_key]) {
 								if (r->angle==0) {
 									r->op=ROBOTOP_FORWARD;
 								} else {
@@ -1179,7 +1259,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 												  else r->op=ROBOTOP_LEFT;
 								} /* if */ 
 							} /* if */ 
-							if (keyboard[left_key]) {
+							if (keyboard[up_key]) {
 								if (r->angle==180) {
 									r->op=ROBOTOP_FORWARD;
 								} else {
@@ -1187,7 +1267,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 												 else r->op=ROBOTOP_LEFT;
 								} /* if */ 
 							} /* if */ 
-							if (keyboard[up_key]) {
+							if (keyboard[right_key]) {
 								if (r->angle==90) {
 									r->op=ROBOTOP_FORWARD;
 								} else {
@@ -1195,7 +1275,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 												else r->op=ROBOTOP_LEFT;
 								} /* if */ 
 							} /* if */ 
-							if (keyboard[down_key]) {
+							if (keyboard[left_key]) {
 								if (r->angle==270) {
 									r->op=ROBOTOP_FORWARD;
 								} else {
@@ -1208,6 +1288,10 @@ bool NETHER::cycle(unsigned char *keyboard)
 					} /* if */ 
 				} /* while */ 
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Deleting robots\n",i);
+	fflush(debug_fp);
+#endif
 				while(!robotstodelete.EmptyP()) {
 					r=robotstodelete.Extract();
 					AI_killrobot(r->pos);
@@ -1218,6 +1302,11 @@ bool NETHER::cycle(unsigned char *keyboard)
 
 			} /* for */ 
 		}
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Buildings\n");
+	fflush(debug_fp);
+#endif
 
 		/* Buildings: */ 
 		{
@@ -1278,6 +1367,11 @@ bool NETHER::cycle(unsigned char *keyboard)
 
 			} /* while */ 
 		}
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Bullets\n");
+	fflush(debug_fp);
+#endif
 
 		/* Bullets: */ 
 		{
@@ -1342,6 +1436,11 @@ bool NETHER::cycle(unsigned char *keyboard)
 			} /* while */ 
 		}
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Nuclear explosions\n");
+	fflush(debug_fp);
+#endif
+
 		/* Nuclear explosions: */ 
 		{
 			List<EXPLOSION> l,todelete;
@@ -1363,6 +1462,11 @@ bool NETHER::cycle(unsigned char *keyboard)
 			} /* while */ 
 		}
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Particles\n");
+	fflush(debug_fp);
+#endif
+
 		/* Particles: */ 
 		{
 			List<PARTICLE> l,todelete;
@@ -1383,6 +1487,10 @@ bool NETHER::cycle(unsigned char *keyboard)
 
 	}
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Starting STATUS cycle\n");
+	fflush(debug_fp);
+#endif
 
 	/* STATUS Cycle: */ 
 	{
@@ -1421,6 +1529,11 @@ bool NETHER::cycle(unsigned char *keyboard)
 	if (game_finished>=END_TIME) return false;
 
 	if (game_started>0) game_started--;
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"PLAY CYCLE ENDS\n");
+	fflush(debug_fp);
+#endif
 
 	return true;
 } /* NETHER::cycle */ 

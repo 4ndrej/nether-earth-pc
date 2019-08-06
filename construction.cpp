@@ -25,7 +25,7 @@
 
 
 extern int frames_per_sec;
-extern bool shadows;
+extern int shadows;
 extern bool sound;
 extern int up_key,down_key,left_key,right_key,fire_key;
 
@@ -321,6 +321,7 @@ bool NETHER::construction_cycle(unsigned char *keyboard)
 			*r=in_construction;
 			r->angle=0;
 			r->program=PROGRAM_FORWARD;
+			r->program_parameter=9;
 			r->op=ROBOTOP_NONE;
 			r->cmc=RobotCMC(r,0);
 			r->shipover=false;

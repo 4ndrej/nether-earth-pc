@@ -668,4 +668,3 @@ int NETHER::RobotCost(ROBOT *r)
 
 	return tmp;
 } /* NETHER::RobotCost */ 
-

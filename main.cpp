@@ -26,7 +26,7 @@ int SCREEN_X=640;
 int SCREEN_Y=480;
 
 int COLOUR_DEPTH=32;
-bool shadows=true;
+int shadows=1;
 int detaillevel=4;
 bool sound=true;
 int up_key=SDLK_q,down_key=SDLK_a,left_key=SDLK_o,right_key=SDLK_p,fire_key=SDLK_SPACE,pause_key=SDLK_F1;
@@ -34,6 +34,7 @@ int level=1;
 int mainmenu_status=0;
 int mainmenu_substatus=0;
 bool fullscreen=false;
+bool show_radar=true;
 char mapname[128]="original.map";
 C3DObject *nethertittle=0;
 
@@ -114,7 +115,7 @@ SDL_Surface *initialization(int flags)
 		return 0;
 	} /* if */ 
 
-	SDL_WM_SetCaption("Nether Earth REMAKE v0.41", 0);
+	SDL_WM_SetCaption("Nether Earth REMAKE v0.51", 0);
 	SDL_ShowCursor(SDL_DISABLE);
 
 	return screen;
@@ -180,7 +181,7 @@ int main(int argc, char** argv)
 
 								screen_sfc = SDL_SetVideoMode(SCREEN_X, SCREEN_Y, COLOUR_DEPTH, SDL_OPENGL|(fullscreen ? SDL_FULLSCREEN : 0));
 								if (game!=0) game->loadobjects();
-								SDL_WM_SetCaption("Nether Earth REMAKE v0.41", 0);
+								SDL_WM_SetCaption("Nether Earth REMAKE v0.5", 0);
 								SDL_ShowCursor(SDL_DISABLE);
 							} else {
 								quit = true;
@@ -208,7 +209,7 @@ int main(int argc, char** argv)
 
 			do {
 				time+=REDRAWING_PERIOD;
-				if ((act_time-time)>4*REDRAWING_PERIOD) time=act_time;
+				if ((act_time-time)>50*REDRAWING_PERIOD) time=act_time;
 			
 				if (game!=0) {
 					if (!game->gamecycle(SCREEN_X,SCREEN_Y)) {
@@ -219,7 +220,11 @@ int main(int argc, char** argv)
 					} /* if */  
 				} else {
 					int val=mainmenu_cycle(SCREEN_X,SCREEN_Y);
-					if (val==1) game=new NETHER(mapname);
+					if (val==1) {
+						char tmp[256];
+						sprintf(tmp,"maps/%s",mapname);
+						game=new NETHER(tmp);
+					} /* if */ 
 					if (val==2) quit=true;
 					if (val==3) {
 						if (game!=0) game->refresh_display_lists();
@@ -238,7 +243,7 @@ int main(int argc, char** argv)
 
 							screen_sfc = SDL_SetVideoMode(SCREEN_X, SCREEN_Y, COLOUR_DEPTH, SDL_OPENGL|(fullscreen ? SDL_FULLSCREEN : 0));
 							if (game!=0) game->loadobjects();
-							SDL_WM_SetCaption("Nether Earth REMAKE v0.41", 0);
+							SDL_WM_SetCaption("Nether Earth REMAKE v0.5", 0);
 							SDL_ShowCursor(SDL_DISABLE);
 						} else {
 							quit = true;

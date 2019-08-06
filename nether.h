@@ -1,6 +1,10 @@
 #ifndef NETHER_HEADER
 #define NETHER_HEADER
 
+
+// #define _WRITE_REPORT_
+
+
 #define COLISION_TEST_THRESHOLD	9.0
 #define INTRO_TIME 60
 #define END_TIME 260
@@ -72,6 +76,7 @@
 #define T_ROBOT		6
 #define T_EROBOT	7
 #define T_OUT		8
+#define T_LOWBUILDING	9 // means we can shoot over this building
 
 /* RESOURCES: */ 
 #define R_GENERAL		0
@@ -322,6 +327,7 @@ private:
 	AI_OPERATOR *AI_chooseoperator(List<AI_OPERATOR> *l,int factor);
 	int  AI_robothere(Vector pos);
 	int  AI_RealShotPaths(int x,int y,int player,int persistence);
+	bool AI_isbulletproof(int discreetmappos);
 
 	/* Game variables: */ 
 	int map_w,map_h;
@@ -394,4 +400,3 @@ private:
 };
 
 #endif
-

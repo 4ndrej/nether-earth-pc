@@ -138,4 +138,3 @@ void Shadow3DObject::ComputeShadow(Vector light)
 	shdw_puntos=pry_puntos;
 	shdw_cmc.set(shdw_puntos,shdw_npuntos);
 } /* Shadow3DObject::ComputeShadow */ 
-

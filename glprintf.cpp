@@ -7,7 +7,6 @@
 #include "stdarg.h"
 #include "GL/gl.h"
 #include "GL/glut.h"
-#include <string.h>	// by packager kuznecov@blok-caf.ru
 
 void glprintf(const char *fmt, ...)						
 {
@@ -134,4 +133,3 @@ void fittedglprintf(float sx,float sy,const char *fmt, ...)
 
 	glPopMatrix();
 } /* fittedglprintf */ 
-

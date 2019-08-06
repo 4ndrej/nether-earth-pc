@@ -14,8 +14,6 @@
 #include "bitmap.h"
 
 #include "myglutaux.h"
-#include <stdlib.h>	// by packager kuznecov@blok-caf.ru
-#include <string.h>	// by packager kuznecov@blok-caf.ru
 
 
 

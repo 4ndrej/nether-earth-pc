@@ -22,34 +22,70 @@
 #include "nether.h"
 
 #include "glprintf.h"
-#include <stdlib.h>	// by packager kuznecov@blok-caf.ru
 
 extern int frames_per_sec;
 extern bool fullscreen;
-extern bool shadows;
+extern int shadows;
 extern bool sound;
 extern int up_key,down_key,left_key,right_key,fire_key,pause_key;
 extern int level;
 extern float MINY,MAXY,MINX,MAXX;
+extern bool show_radar;
+
+#ifdef _WRITE_REPORT_
+FILE *debug_fp=0;
+#endif
 
 
 NETHER::NETHER(char *mapname)
 {
-	lightpos[0]=-1000;
-	lightpos[1]=-3000;
-	lightpos[2]=5000;
-	lightpos[3]=1;
-	lightposv.x=lightpos[0];
-	lightposv.y=lightpos[1];
-	lightposv.z=lightpos[2];
+
+#ifdef _WRITE_REPORT_
+	debug_fp=fopen("report.txt","w");
+	fprintf(debug_fp,"Creating game...\n");
+	fflush(debug_fp);
+#endif
+
+	if (shadows==1) {
+		lightpos[0]=-1000;
+		lightpos[1]=-3000;
+		lightpos[2]=5000;
+		lightpos[3]=1;
+		lightposv.x=lightpos[0];
+		lightposv.y=lightpos[1];
+		lightposv.z=lightpos[2];
+	} else {
+		lightpos[0]=0;
+		lightpos[1]=0;
+		lightpos[2]=5000;
+		lightpos[3]=1;
+		lightposv.x=lightpos[0];
+		lightposv.y=lightpos[1];
+		lightposv.z=lightpos[2];
+	} /* if */ 
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"loading objects...\n");
+	fflush(debug_fp);
+#endif
 
 	loadobjects();
 		
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"loading map...\n");
+	fflush(debug_fp);
+#endif
+
 	/* Load map: */ 
 	if (!loadmap(mapname)) {
 		map_w=map_h=0;
 		map=0;
 	} /* if */ 
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Initializing game variables...\n");
+	fflush(debug_fp);
+#endif
 
 	/* Set camera: */ 
 	viewp.x=map_w/2;
@@ -57,7 +93,7 @@ NETHER::NETHER(char *mapname)
 	camera.x=6;
 	camera.y=-6;
 	camera.z=11;
-	zoom=1;
+	if (zoom==0) zoom=2;
 
 	/* Init game: */ 
 	day=0;
@@ -110,13 +146,28 @@ NETHER::NETHER(char *mapname)
 	game_finished=0;
 	game_started=INTRO_TIME;
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Creating menus...\n");
+	fflush(debug_fp);
+#endif
+
 	/* Init status: */ 
 	newmenu(GENERAL_MENU);
 	redrawmenu=2;
 	redrawradar=1;
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Initializing AI...\n");
+	fflush(debug_fp);
+#endif
+
 	/* Init AI: */ 
 	AI_precomputations();
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Loading sounds...\n");
+	fflush(debug_fp);
+#endif
 
 	/* Load sounds: */ 
 	S_shot=Mix_LoadWAV("sound/shot.wav");
@@ -124,11 +175,28 @@ NETHER::NETHER(char *mapname)
 	S_select=Mix_LoadWAV("sound/select.wav");
 	S_wrong=Mix_LoadWAV("sound/wrong.wav");
 	S_construction=Mix_LoadWAV("sound/construction.wav");
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Game created.\n");
+	fflush(debug_fp);
+#endif
+
 } /* NETHER::NETHER */ 
 
 
 NETHER::~NETHER()
 {
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Destroying Game...\n");
+	fflush(debug_fp);
+#endif
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Deleting sounds...\n");
+	fflush(debug_fp);
+#endif
+
 	Mix_FreeChunk(S_shot);
 	Mix_FreeChunk(S_explosion);
 	Mix_FreeChunk(S_select);
@@ -140,14 +208,34 @@ NETHER::~NETHER()
 	S_wrong=0;
 	S_construction=0;
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Deleting objects...\n");
+	fflush(debug_fp);
+#endif
+
 	deleteobjects();
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Deleting AI...\n");
+	fflush(debug_fp);
+#endif
+
 	AI_deleteprecomputations();
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Deleting map...\n");
+	fflush(debug_fp);
+#endif
 
 	/* Delete map: */ 
 	if (map!=0) delete map;
 	map=0;
 	map_w=map_h=0;
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Game destroyed.\n");
+	fclose(debug_fp);
+#endif
 
 } /* NETHER::~NETHER */ 
 
@@ -356,6 +444,12 @@ bool NETHER::gamecycle(int w,int h)
 	SDL_PumpEvents();
 	keyboard = SDL_GetKeyState(NULL);
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Cycle start.\n");
+	fprintf(debug_fp,"game_state: %i\n",game_state);
+	fflush(debug_fp);
+#endif
+
 	switch(game_state) {
 	case STATE_PLAYING:
 		retval=cycle(keyboard);
@@ -372,12 +466,24 @@ bool NETHER::gamecycle(int w,int h)
 
 	for(i=0;i<SDLK_LAST;i++) old_keyboard[i]=keyboard[i];
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Cycle end: %i\n",retval);
+	fflush(debug_fp);
+#endif
+
 	return retval;
 } /* NETHER::gamecycle */ 
 
 
 void NETHER::gameredraw(int w,int h)
 {
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Redraw start.\n");
+	fprintf(debug_fp,"game_state: %i\n",game_state);
+	fflush(debug_fp);
+#endif
+
 	switch(game_state) {
 	case STATE_PLAYING:
 		draw(w,h);
@@ -394,6 +500,12 @@ void NETHER::gameredraw(int w,int h)
 	} /* switch */ 
 
 	SDL_GL_SwapBuffers();
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Redraw end.");
+	fflush(debug_fp);
+#endif
+
 } /* gameredraw */ 
 
 
@@ -405,7 +517,10 @@ void NETHER::draw(int width,int height)
 	float tmpla[4]={0.2F,0.2F,0.2F,1.0};
     float ratio;
 	int split = int((width*25.0F)/32.0F);
-	int splity = int((height*2.0F)/15.0F)+1;
+	int splity = 0;
+
+	if (show_radar) splity = int((height*2.0F)/15.0F)+1;
+			   else splity = 0;
 
 	/* Enable Lights, etc.: */ 
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);	// Really Nice Perspective Calculations
@@ -505,7 +620,7 @@ void NETHER::draw(int width,int height)
 	} /* if */ 
 
 	/* Draw the RADAR screen: */ 
-	if (redrawradar<=1) {
+	if (show_radar && redrawradar<=1) {
 
 		glLightfv(GL_LIGHT0,GL_POSITION,lightpos2);
 		glClearColor(0.0,0.0,0,0);
@@ -1390,4 +1505,3 @@ int NETHER::SFX_volume(Vector pos)
 
 	return int(128/distance);
 } /* SFX_volume */ 
-

@@ -14,7 +14,7 @@ Bitmap::Bitmap(char *file)
 	g=0;
 	b=0;
 
-	fp=fopen(file,"rb");
+	fp=fopen(file,"rb+");
 	if (fp==NULL) return;
 
 	/* Tag: */ 
@@ -64,4 +64,3 @@ Bitmap::~Bitmap()
 	delete []g;
 	delete []b;
 } /* Bitmap::~Bitmap */ 
-

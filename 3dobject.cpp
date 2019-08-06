@@ -74,7 +74,7 @@ bool C3DObject::loadASC(char *file)
 
 	int *smooth;
 
-	fp=fopen(file,"r");
+	fp=fopen(file,"r+");
 	if (fp==NULL) return false;
 
 	/* Importar un fichero .ASC de 3DStudio */ 
