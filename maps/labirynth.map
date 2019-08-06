@@ -1,0 +1,715 @@
+32
+54
+M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M 
+M M M M M M G G G G G G G G G M S2 S2 M S2 S2 M G G G G G M S2 M S2 M 
+M M M M M M G M G G G G G G G M M S2 M M M M G G G G G M M S2 M M 
+M M M M M M G G G G M M M G G M G G G G G G M G M G M M S2 M S2 M 
+M M M M M G G G G G M S2 M M G M G G G G G G G G M G G M M M M M 
+M M M M M M G G M M M S2 M G G M G G M M M M M M M G G M S2 S2 S2 M 
+M M M M M M G G M M M S2 M G G M M G M G G G G G M G G M S2 G S2 M 
+M M M M M M G G G G M S2 M G G M G G M G G G G G M G G M S2 G S2 M 
+M M M M M M M M M M M M M G G M G G M M G M M G M G G M M G S2 M 
+M S2 M M M M G G M G G G G G G G G G M G G M G G M G G M G G S2 M 
+M S2 M M G G G G G G G G G G M M G G M M G M M G M G G M M G S2 M 
+M S2 M M M M G M G G G G G G G G G G M G G G G G M G G M S2 G S2 M 
+M M M M M M M M M M G G M M M M S2 S2 M G G G G G M G G M S2 G S2 M 
+M M M G G G G G G M G G M M M M M M M M G G G M M G G M M G M M 
+M M M G G M M G G M G G M G G G G M G G G M G G G M G G G G G M 
+M M G G G M G G M M M G M G G G G G G G G G G G G G G G G G G M 
+M M M G G M M G G M G G M M G M M M M M M M M M M G G M M G G M 
+M M M G G G G G G M G G M G G M M M M M M M M M M G G M M G M M 
+M S2 M M M G G M M M G G M G G M G G G G M G G G G G G G M G G M 
+M M M G G G G G G G G G M G G G G G M G M G M M G M M G M G G M 
+M M M M M M M M M M M M M M M M M M G G M G M G G M G G M M G M 
+M M G G G G G M G G G G S S2 M M S2 S G G M G M M G M M G M M G M 
+M M M G G G G G G G M G S S2 M M S2 S G G M G G G G G G G M G G M 
+M S S S M M M M M M M M M M M M M M M M M M M M M M M M M G G M 
+M S S S M S S S G G M M G G G G G G G G G G G M M M S2 S2 S G G M 
+M S2 S2 M M M S S G G G G G G M M G G G G M G G M M M S2 S2 S G G M 
+M S2 S2 M M M S S G G M M M M M M M M G G G G G M S2 S2 M M M G G M 
+M M M M M M S M M M M S2 G G G G S2 M M M M G G M S2 S2 M S2 M G G M 
+M M M M M M S M G G M S2 G M G G S2 M G G M G G M S S M S2 M G G M 
+M M M M S2 S2 S M G G G S2 G G G G S2 G G M M G G G G M M S2 M G G M 
+M M M M S2 S2 S M G G G S2 M G G M S2 G G G M G G G G G M S2 M G M M 
+M M M M M M M M M M M M M G G M M M M M M M M M M M M M M G G M 
+M M M M M M G G G G G G G G G G G G G G M G G G G G G G G G G M 
+M M M M M M G G G G G G G G G G G G G G M G G G G M M M G G G M 
+M M M M M M G G G G G G G G G G G G G G M M G M M M M M M M S2 M 
+M M M M M G G G G G M M G G G G M M G G M G G M S2 S2 M S2 S2 M S2 M 
+M M M M M M G G G G M G G M M G M G G G M G G M S2 S2 M S2 S2 M S2 M 
+M M M M M M M G G G M M G M M G M M G G M G G M S S M S S M S2 M 
+M M M M M M G G G G G G G G G G G G G G M G G M M G M G G M S2 M 
+M M M M M M M G G G M M G M M G M M G G M G G M G G M G G M S2 M 
+M M G G G G G G G G M G G M M G M G G G M G G G M G M G G M S2 M 
+M M M M M M M G G G M M G G G G M M G G M G M G G G M G G M M M 
+M M M M M M G G G G G G G G G G G G G G M M M M M M M G G M S2 M 
+M M M M M M M G G G G G M G G G G G G G G G G G G G M M G M S2 M 
+M M M M M M G G G G G M M M M G G G G G G G G G G G M G G M S2 M 
+M M M M M G G G G G G G M M G G G G G G M M M M G G M G G M M M 
+M M M M M M G M M G M M M M M G M M G G M S2 S2 M M G G G G M S2 M 
+M M M M M M G M G G M S2 M S2 M G M G G G M M S2 M G G G G G M S2 M 
+M M M M M M G M M S2 M S2 S2 S2 M M M M M M M S2 S2 M S2 S2 M M M M S2 M 
+M M M M M M G M M M M M M M M M M M M M M M M M M M M M M M M M 
+M M M M M M G S2 S2 M M S2 S2 S2 S2 S2 M S2 S2 S2 S2 M S2 S2 S2 S2 M S2 S2 M S2 M 
+M M M M M M G M M M M M S2 M M M M M S2 M M M M M M M M M S2 M S2 M 
+M S2 M M M M G S2 S2 S2 S2 S2 S2 M M S2 S2 S2 S2 M M S2 S2 S2 M S2 S2 S2 S2 M S2 M 
+M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M 
+wall4 0 0 
+wall4 1 0 
+wall4 2 0 
+wall4 3 0 
+wall4 4 0 
+wall4 5 0 
+wall4 6 0 
+wall4 7 0 
+wall4 8 0 
+wall4 9 0 
+wall4 10 0 
+wall4 11 0 
+wall4 12 0 
+wall4 13 0 
+wall4 14 0 
+wall4 15 0 
+wall4 16 0 
+wall4 17 0 
+wall4 18 0 
+wall4 19 0 
+wall4 20 0 
+wall4 21 0 
+wall4 22 0 
+wall4 23 0 
+wall4 24 0 
+wall4 25 0 
+wall4 26 0 
+wall4 27 0 
+wall4 28 0 
+wall4 29 0 
+wall4 30 0 
+wall4 31 0 
+wall4 0 1 
+wall4 5 1 
+wall2 15 1 
+wall4 18 1 
+fence 19 1 
+fence 20 1 
+wall4 21 1 
+wall4 27 1 
+fence 28 1 
+wall3 29 1 
+fence 30 1 
+wall4 31 1 
+wall4 0 2 
+warbase 2 2 1
+wall4 5 2 
+wall3 7 2 
+wall2 15 2 
+wall6 16 2 
+wall4 18 2 
+wall4 19 2 
+wall4 20 2 
+wall4 21 2 
+wall4 27 2 
+wall3 28 2 
+fence 29 2 
+wall3 30 2 
+wall4 31 2 
+wall4 0 3 
+wall4 10 3 
+wall4 11 3 
+wall4 12 3 
+wall2 15 3 
+wall3 22 3 
+wall2 24 3 
+wall3 26 3 
+wall4 27 3 
+fence 28 3 
+wall3 29 3 
+fence 30 3 
+wall4 31 3 
+wall4 0 4 
+wall4 10 4 
+fence 11 4 
+wall4 12 4 
+wall3 13 4 
+wall2 15 4 
+wall2 24 4 
+wall4 27 4 
+wall4 28 4 
+wall4 29 4 
+wall4 30 4 
+wall4 31 4 
+wall4 0 5 
+wall3 8 5 
+wall3 9 5 
+wall4 10 5 
+fence 11 5 
+wall4 12 5 
+wall2 15 5 
+wall4 18 5 
+wall4 19 5 
+wall4 20 5 
+wall4 21 5 
+wall4 22 5 
+wall4 23 5 
+wall4 24 5 
+wall4 27 5 
+wall4 31 5 
+wall4 0 6 
+wall4 5 6 
+wall3 8 6 
+wall3 9 6 
+wall4 10 6 
+fence 11 6 
+wall4 12 6 
+wall2 15 6 
+wall3 16 6 
+wall4 18 6 
+wall4 24 6 
+wall4 27 6 
+wall4 31 6 
+wall4 0 7 
+wall4 5 7 
+wall4 10 7 
+fence 11 7 
+wall4 12 7 
+wall2 15 7 
+wall4 18 7 
+wall4 24 7 
+wall4 27 7 
+wall4 31 7 
+wall4 0 8 
+wall4 1 8 
+wall4 2 8 
+wall4 3 8 
+wall4 4 8 
+wall4 5 8 
+wall2 6 8 
+wall2 7 8 
+wall2 8 8 
+wall2 9 8 
+wall4 10 8 
+wall4 11 8 
+wall4 12 8 
+wall2 15 8 
+factory 18 8 electronics
+factory 21 8 cannons
+wall4 24 8 
+factory 27 8 phasers
+wall4 31 8 
+wall4 0 9 
+fence 1 9 
+wall4 2 9 
+factory 3 9 electronics
+wall4 5 9 
+wall3 8 9 
+wall4 24 9 
+wall4 31 9 
+wall4 0 10 
+fence 1 10 
+wall4 2 10 
+wall3 14 10 
+wall3 15 10 
+wall4 24 10 
+wall4 31 10 
+wall4 0 11 
+fence 1 11 
+wall4 2 11 
+wall4 5 11 
+wall3 7 11 
+wall4 18 11 
+wall4 24 11 
+wall4 27 11 
+wall4 31 11 
+wall4 0 12 
+wall4 1 12 
+wall4 2 12 
+wall4 3 12 
+wall4 4 12 
+wall4 5 12 
+wall4 6 12 
+wall4 7 12 
+wall4 8 12 
+wall4 9 12 
+wall4 12 12 
+wall2 13 12 
+wall2 14 12 
+wall2 15 12 
+wall4 18 12 
+wall4 24 12 
+wall4 27 12 
+wall4 31 12 
+wall4 0 13 
+wall4 1 13 
+wall4 2 13 
+wall4 9 13 
+wall4 12 13 
+wall2 13 13 
+wall2 14 13 
+wall2 15 13 
+wall2 16 13 
+wall2 17 13 
+wall4 18 13 
+wall4 19 13 
+wall4 23 13 
+wall4 24 13 
+wall4 27 13 
+wall4 28 13 
+wall4 30 13 
+wall4 31 13 
+wall4 0 14 
+factory 1 14 missiles
+factory 5 14 phasers
+wall4 9 14 
+wall4 12 14 
+wall3 17 14 
+wall3 21 14 
+wall3 25 14 
+wall4 31 14 
+wall4 0 15 
+wall3 8 15 
+wall4 9 15 
+wall3 10 15 
+wall4 12 15 
+wall4 31 15 
+wall4 0 16 
+wall4 9 16 
+wall4 12 16 
+wall3 13 16 
+wall2 15 16 
+wall2 16 16 
+wall2 17 16 
+wall2 18 16 
+wall2 19 16 
+wall2 20 16 
+wall2 21 16 
+wall2 22 16 
+wall2 23 16 
+wall2 24 16 
+wall2 27 16 
+wall2 28 16 
+wall4 31 16 
+wall4 0 17 
+wall4 1 17 
+wall4 2 17 
+wall4 9 17 
+wall4 12 17 
+wall2 15 17 
+wall2 16 17 
+wall2 17 17 
+wall2 18 17 
+wall2 19 17 
+wall4 20 17 
+wall4 21 17 
+wall4 22 17 
+wall4 23 17 
+wall4 24 17 
+wall4 27 17 
+wall4 28 17 
+wall3 30 17 
+wall4 31 17 
+wall4 0 18 
+fence 1 18 
+wall4 2 18 
+wall4 3 18 
+wall4 4 18 
+wall4 7 18 
+wall4 8 18 
+wall4 9 18 
+wall4 12 18 
+wall3 15 18 
+wall4 20 18 
+wall4 28 18 
+wall4 31 18 
+wall4 0 19 
+wall4 1 19 
+wall4 2 19 
+wall4 12 19 
+wall3 18 19 
+wall4 20 19 
+factory 22 19 chassis
+factory 25 19 chassis
+wall4 28 19 
+wall4 31 19 
+wall4 0 20 
+factory 1 20 chassis
+wall4 3 20 
+wall4 4 20 
+wall4 5 20 
+wall4 6 20 
+wall4 7 20 
+wall4 8 20 
+wall4 9 20 
+wall4 10 20 
+wall4 11 20 
+wall4 12 20 
+wall2 13 20 
+wall2 14 20 
+wall2 15 20 
+wall2 16 20 
+wall2 17 20 
+wall4 20 20 
+wall4 28 20 
+wall3 29 20 
+wall4 31 20 
+wall4 0 21 
+wall3 7 21 
+wall4 20 21 
+wall4 28 21 
+wall3 29 21 
+wall4 31 21 
+wall4 0 22 
+wall3 10 22 
+wall4 20 22 
+wall4 28 22 
+wall4 31 22 
+wall4 0 23 
+factory 4 23 missiles
+wall4 6 23 
+wall4 7 23 
+wall2 8 23 
+wall2 9 23 
+wall2 10 23 
+wall2 11 23 
+wall2 12 23 
+wall2 13 23 
+wall2 14 23 
+wall2 15 23 
+wall2 16 23 
+wall2 17 23 
+wall2 18 23 
+wall2 19 23 
+wall4 20 23 
+wall4 21 23 
+wall4 22 23 
+wall4 23 23 
+wall4 24 23 
+wall4 25 23 
+wall4 26 23 
+wall4 27 23 
+wall4 28 23 
+wall4 31 23 
+wall4 0 24 
+wall3 10 24 
+wall3 11 24 
+wall2 23 24 
+wall4 31 24 
+wall4 0 25 
+wall2 3 25 
+wall3 14 25 
+wall3 15 25 
+wall3 20 25 
+wall2 23 25 
+wall4 31 25 
+wall4 0 26 
+wall2 3 26 
+wall4 4 26 
+wall3 5 26 
+wall2 10 26 
+wall2 11 26 
+wall2 12 26 
+wall2 13 26 
+wall2 14 26 
+wall2 15 26 
+wall2 16 26 
+wall2 17 26 
+wall2 23 26 
+wall4 26 26 
+wall4 27 26 
+wall4 28 26 
+wall4 31 26 
+wall4 0 27 
+wall2 3 27 
+wall4 4 27 
+wall3 5 27 
+wall4 7 27 
+wall2 10 27 
+wall2 17 27 
+wall2 20 27 
+wall2 23 27 
+wall4 26 27 
+fence 27 27 
+wall4 28 27 
+wall4 31 27 
+wall4 0 28 
+wall2 3 28 
+wall2 4 28 
+wall3 5 28 
+wall2 7 28 
+wall2 10 28 
+wall3 13 28 
+wall2 17 28 
+wall2 20 28 
+wall2 23 28 
+wall4 26 28 
+fence 27 28 
+wall4 28 28 
+wall4 31 28 
+wall4 0 29 
+wall3 1 29 
+wall2 7 29 
+wall3 19 29 
+wall2 20 29 
+wall3 25 29 
+wall4 26 29 
+fence 27 29 
+wall4 28 29 
+wall4 31 29 
+wall4 0 30 
+wall6 1 30 
+wall3 2 30 
+wall2 7 30 
+wall2 12 30 
+wall2 15 30 
+wall2 20 30 
+wall4 26 30 
+fence 27 30 
+wall4 28 30 
+wall3 30 30 
+wall4 31 30 
+wall4 0 31 
+wall4 1 31 
+wall4 2 31 
+wall4 3 31 
+wall4 4 31 
+wall4 5 31 
+wall4 6 31 
+wall4 7 31 
+wall4 8 31 
+wall4 9 31 
+wall4 10 31 
+wall4 11 31 
+wall4 12 31 
+wall4 15 31 
+wall4 16 31 
+wall4 17 31 
+wall4 18 31 
+wall4 19 31 
+wall4 20 31 
+wall2 21 31 
+wall2 22 31 
+wall2 23 31 
+wall2 24 31 
+wall2 25 31 
+wall4 26 31 
+wall4 27 31 
+wall4 28 31 
+wall4 31 31 
+wall4 0 32 
+wall4 5 32 
+wall4 20 32 
+wall4 31 32 
+wall4 0 33 
+warbase 2 33 2
+wall4 5 33 
+wall4 20 33 
+wall3 25 33 
+wall3 26 33 
+wall3 27 33 
+wall4 31 33 
+wall4 0 34 
+wall4 20 34 
+wall3 21 34 
+wall2 23 34 
+wall2 24 34 
+wall2 25 34 
+wall2 26 34 
+wall2 27 34 
+wall2 28 34 
+wall2 29 34 
+wall4 31 34 
+wall4 0 35 
+factory 10 35 missiles
+factory 16 35 phasers
+wall4 20 35 
+wall2 23 35 
+wall2 29 35 
+wall4 31 35 
+wall4 0 36 
+wall1 13 36 
+wall1 14 36 
+wall4 20 36 
+wall2 23 36 
+wall2 29 36 
+wall4 31 36 
+wall4 0 37 
+factory 5 37 chassis
+wall1 13 37 
+wall1 14 37 
+wall4 20 37 
+wall2 23 37 
+wall2 26 37 
+wall2 29 37 
+wall4 31 37 
+wall4 0 38 
+wall4 20 38 
+wall2 23 38 
+wall3 24 38 
+wall2 26 38 
+wall2 29 38 
+wall4 31 38 
+wall4 0 39 
+factory 1 39 electronics
+wall2 3 39 
+wall2 4 39 
+factory 10 39 missiles
+wall1 13 39 
+wall1 14 39 
+factory 16 39 phasers
+wall4 20 39 
+wall2 23 39 
+wall2 26 39 
+wall2 29 39 
+wall4 31 39 
+wall4 0 40 
+wall1 13 40 
+wall1 14 40 
+wall4 20 40 
+wall3 24 40 
+wall2 26 40 
+wall2 29 40 
+wall4 31 40 
+wall4 0 41 
+wall2 3 41 
+wall2 4 41 
+factory 5 41 chassis
+wall4 20 41 
+wall3 22 41 
+wall2 26 41 
+wall4 29 41 
+wall4 30 41 
+wall4 31 41 
+wall4 0 42 
+wall4 20 42 
+wall2 21 42 
+wall2 22 42 
+wall2 23 42 
+wall2 24 42 
+wall2 25 42 
+wall2 26 42 
+wall4 29 42 
+fence 30 42 
+wall4 31 42 
+wall4 0 43 
+warbase 2 43 2
+warbase 11 43 2
+wall2 26 43 
+wall3 27 43 
+wall4 29 43 
+fence 30 43 
+wall4 31 43 
+wall4 0 44 
+wall2 26 44 
+wall4 29 44 
+fence 30 44 
+wall4 31 44 
+wall4 0 45 
+wall4 20 45 
+wall2 21 45 
+wall2 22 45 
+wall2 23 45 
+wall2 26 45 
+wall4 29 45 
+wall4 30 45 
+wall4 31 45 
+wall4 0 46 
+factory 7 46 cannons
+wall4 10 46 
+factory 16 46 cannons
+wall4 20 46 
+wall2 23 46 
+wall3 24 46 
+wall4 29 46 
+fence 30 46 
+wall4 31 46 
+wall4 0 47 
+wall4 5 47 
+wall4 10 47 
+wall4 14 47 
+wall4 20 47 
+wall3 21 47 
+wall2 23 47 
+wall4 29 47 
+fence 30 47 
+wall4 31 47 
+wall4 0 48 
+wall4 5 48 
+wall4 10 48 
+wall4 14 48 
+wall4 15 48 
+wall4 18 48 
+wall4 19 48 
+wall4 20 48 
+wall2 23 48 
+wall2 26 48 
+wall2 27 48 
+wall2 28 48 
+wall4 29 48 
+fence 30 48 
+wall4 31 48 
+wall4 0 49 
+wall4 5 49 
+factory 10 49 chassis
+factory 16 49 missiles
+factory 26 49 phasers
+wall4 29 49 
+wall4 30 49 
+wall4 31 49 
+wall4 0 50 
+wall4 5 50 
+wall3 9 50 
+wall6 21 50 
+wall4 29 50 
+fence 30 50 
+wall4 31 50 
+wall4 0 51 
+wall4 1 51 
+wall4 2 51 
+wall4 5 51 
+wall6 7 51 
+wall4 29 51 
+fence 30 51 
+wall4 31 51 
+wall4 0 52 
+fence 1 52 
+wall4 2 52 
+wall4 5 52 
+wall6 13 52 
+wall6 14 52 
+wall6 19 52 
+wall6 20 52 
+wall6 24 52 
+wall4 29 52 
+fence 30 52 
+wall4 31 52 
+wall4 0 53 
+wall4 1 53 
+wall4 2 53 
+wall4 3 53 
+wall4 4 53 
+wall4 5 53 
+wall4 6 53 
+wall4 7 53 
+wall4 8 53 
+wall4 9 53 
+wall4 10 53 
+wall4 11 53 
+wall4 12 53 
+wall4 13 53 
+wall4 14 53 
+wall4 15 53 
+wall4 16 53 
+wall4 17 53 
+wall4 18 53 
+wall4 19 53 
+wall4 20 53 
+wall4 21 53 
+wall4 22 53 
+wall4 23 53 
+wall4 24 53 
+wall4 25 53 
+wall4 26 53 
+wall4 27 53 
+wall4 28 53 
+wall4 29 53 
+wall4 30 53 
+wall4 31 53 

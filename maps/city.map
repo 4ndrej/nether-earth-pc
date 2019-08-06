@@ -1,0 +1,346 @@
+40
+23
+M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M 
+M S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 M S2 S2 S2 M S2 S2 S2 S2 S2 S2 S2 S2 S2 M 
+M S2 S2 G G G G G G G G G G G G M G G G G G G G G S2 M S2 S2 S2 M S2 S2 S2 S2 S2 S2 S2 S2 S2 M 
+M S2 S2 M G G G G M M G G M M G G G M M G G M M G M M S2 M S2 M S2 S2 S2 M M M M S2 S2 M 
+M S2 M M M M G G M G G G G M G G G M G G G G M G M S2 S2 M S2 M S2 S2 M S2 S2 S2 M S2 S2 M 
+M S2 S2 M M G G G M G M M G M G G G M G M M G M G M S2 M M S2 M S2 M S2 S2 M S2 M S2 S2 M 
+M S2 M M M M G G M G M G G M G G G M G M G G M G M S2 M S2 S2 M S2 S2 S2 M S2 S2 M S2 S2 M 
+M S2 S2 M G G G G M G M M G M G G G M G M M G M G M S2 M S2 M M M M M S2 S2 M S2 S2 S2 M 
+M S2 S2 G G G G G M G G G G M G G G M G G G G M G M S2 M S2 M S2 S2 S2 S2 S2 M S2 S2 G S2 M 
+M S2 S2 M G G M G M M M M M M G G G M M M M M M G M S2 M S2 M S2 M M M S2 M S2 G G S2 M 
+M S2 M M M M G G G G G M G G G G G G G G G G G G S2 S2 M S2 M S2 S2 S2 S2 M M M M G S2 M 
+M S2 S2 M M G G G G M G G G G G G G G G G G G G G S2 S2 M S2 M M M M S2 S2 M M G G S2 M 
+M S2 M M M M G G G G G G G G G M G G G G G G G G S2 S2 M S2 M S2 S2 S2 S2 M M M M G S2 M 
+M S2 S2 M G G G M M M M M M M G G G M M M M M M G M M M S2 M S2 M M M S2 M S2 G G S2 M 
+M S2 S2 S2 S2 G M G M G G G G M G G G M G G G G M G M S2 S2 S2 M S2 M S2 M S2 S2 S2 S2 G S2 M 
+M S2 S2 M G G G G M G M M G M G G G M G M M G M G M S2 M M M S2 M S2 M S2 S2 M S2 S2 S2 M 
+M S2 M M M M G G M G M G G M G G G M G M G G M G M S2 S2 M S2 S2 M S2 S2 M S2 S2 M M M M 
+M S2 S2 M M G G G M G M M G M G G G M G M M G M G M S2 S2 M S2 M M S2 S2 S2 M S2 M M S2 M 
+M M M M M M G G M G G G G M G G G M G G G G M G M S2 S2 M S2 S2 M S2 M S2 S2 S2 M S2 S2 M 
+M M M M G G G G M M G G M M G G G M M G G M M G M M S2 M M S2 M S2 S2 M M M M M S2 M 
+M M M S2 G G G G G G G G G G G G G G G G G G G M S2 M S2 S2 S2 S2 M S2 S2 S2 S2 S2 S2 S2 S2 M 
+M M M S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 M S2 S2 S2 S2 M S2 S2 S2 S2 S2 S2 S2 S2 M 
+M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M M 
+fence 0 0 
+fence 1 0 
+fence 2 0 
+fence 3 0 
+fence 4 0 
+fence 5 0 
+fence 6 0 
+fence 7 0 
+fence 8 0 
+fence 9 0 
+fence 10 0 
+fence 11 0 
+fence 12 0 
+fence 13 0 
+fence 14 0 
+fence 15 0 
+fence 16 0 
+fence 17 0 
+fence 18 0 
+fence 19 0 
+fence 20 0 
+fence 21 0 
+fence 22 0 
+fence 23 0 
+fence 24 0 
+fence 25 0 
+fence 26 0 
+fence 27 0 
+fence 28 0 
+fence 29 0 
+fence 30 0 
+fence 31 0 
+fence 32 0 
+fence 33 0 
+fence 34 0 
+fence 35 0 
+fence 36 0 
+fence 37 0 
+fence 38 0 
+fence 39 0 
+fence 0 1 
+wall4 25 1 
+wall3 29 1 
+fence 39 1 
+fence 0 2 
+wall3 15 2 
+wall4 25 2 
+wall3 29 2 
+fence 39 2 
+fence 0 3 
+warbase 2 3 2
+wall4 8 3 
+wall2 9 3 
+wall2 12 3 
+wall4 13 3 
+wall4 17 3 
+wall2 18 3 
+wall2 21 3 
+wall4 22 3 
+wall4 24 3 
+wall4 25 3 
+wall6 27 3 
+wall3 29 3 
+wall4 33 3 
+wall4 34 3 
+wall4 35 3 
+wall4 36 3 
+fence 39 3 
+fence 0 4 
+wall4 8 4 
+wall4 13 4 
+wall4 17 4 
+wall4 22 4 
+wall4 24 4 
+wall6 27 4 
+wall3 29 4 
+wall6 32 4 
+wall4 36 4 
+fence 39 4 
+fence 0 5 
+wall4 8 5 
+factory 10 5 missiles
+wall4 13 5 
+wall4 17 5 
+factory 19 5 chassis
+wall4 22 5 
+wall4 24 5 
+wall3 26 5 
+wall6 27 5 
+wall6 29 5 
+wall3 31 5 
+wall6 34 5 
+wall4 36 5 
+fence 39 5 
+fence 0 6 
+wall4 8 6 
+wall4 13 6 
+wall4 17 6 
+wall4 22 6 
+wall4 24 6 
+wall3 26 6 
+wall3 29 6 
+wall6 33 6 
+wall4 36 6 
+fence 39 6 
+fence 0 7 
+wall4 8 7 
+wall4 13 7 
+wall4 17 7 
+wall4 22 7 
+wall4 24 7 
+wall6 26 7 
+wall6 28 7 
+wall3 29 7 
+wall6 30 7 
+wall3 31 7 
+wall6 32 7 
+wall6 35 7 
+fence 39 7 
+fence 0 8 
+wall4 8 8 
+wall4 13 8 
+wall4 17 8 
+wall4 22 8 
+wall4 24 8 
+wall3 26 8 
+wall6 28 8 
+wall3 34 8 
+fence 39 8 
+fence 0 9 
+warbase 2 9 2
+wall3 6 9 
+wall4 8 9 
+wall4 9 9 
+wall4 10 9 
+wall4 11 9 
+wall4 12 9 
+wall4 13 9 
+wall4 17 9 
+wall4 18 9 
+wall4 19 9 
+wall4 20 9 
+wall4 21 9 
+wall4 22 9 
+wall4 24 9 
+wall4 26 9 
+wall6 28 9 
+wall6 30 9 
+wall6 31 9 
+wall6 32 9 
+warbase 33 9 1
+fence 39 9 
+fence 0 10 
+wall6 11 10 
+wall4 26 10 
+wall6 28 10 
+fence 39 10 
+fence 0 11 
+wall6 9 11 
+wall4 26 11 
+wall6 28 11 
+wall6 29 11 
+wall6 30 11 
+wall6 31 11 
+fence 39 11 
+fence 0 12 
+wall3 15 12 
+wall4 26 12 
+wall6 28 12 
+fence 39 12 
+fence 0 13 
+wall3 7 13 
+wall4 8 13 
+wall4 9 13 
+wall4 10 13 
+wall4 11 13 
+wall4 12 13 
+wall4 13 13 
+wall4 17 13 
+wall4 18 13 
+wall4 19 13 
+wall4 20 13 
+wall4 21 13 
+wall4 22 13 
+wall4 24 13 
+wall3 25 13 
+wall4 26 13 
+wall6 28 13 
+wall6 30 13 
+wall6 31 13 
+wall6 32 13 
+fence 39 13 
+fence 0 14 
+wall6 6 14 
+wall4 8 14 
+wall4 13 14 
+wall4 17 14 
+wall4 22 14 
+wall4 24 14 
+wall6 28 14 
+wall3 30 14 
+wall3 32 14 
+fence 39 14 
+fence 0 15 
+warbase 2 15 2
+wall4 8 15 
+factory 10 15 phasers
+wall4 13 15 
+wall4 17 15 
+factory 19 15 electronics
+wall4 22 15 
+wall4 24 15 
+wall6 26 15 
+wall3 27 15 
+wall6 28 15 
+wall6 30 15 
+wall6 32 15 
+wall6 35 15 
+fence 39 15 
+fence 0 16 
+wall4 8 16 
+wall4 13 16 
+wall4 17 16 
+wall4 22 16 
+wall4 24 16 
+wall3 27 16 
+wall3 30 16 
+wall6 33 16 
+wall4 36 16 
+wall3 37 16 
+wall3 38 16 
+fence 39 16 
+fence 0 17 
+wall4 8 17 
+wall4 13 17 
+wall4 17 17 
+wall4 22 17 
+wall4 24 17 
+wall6 27 17 
+wall6 29 17 
+wall3 30 17 
+wall6 34 17 
+factory 36 17 chassis
+fence 39 17 
+fence 0 18 
+wall4 8 18 
+wall4 13 18 
+wall4 17 18 
+wall4 22 18 
+wall4 24 18 
+wall6 27 18 
+wall3 30 18 
+wall6 32 18 
+fence 39 18 
+fence 0 19 
+wall4 8 19 
+wall2 9 19 
+wall2 12 19 
+wall4 13 19 
+wall4 17 19 
+wall2 18 19 
+wall2 21 19 
+wall4 22 19 
+wall4 24 19 
+wall4 25 19 
+wall6 27 19 
+wall3 28 19 
+wall3 30 19 
+wall4 33 19 
+wall4 34 19 
+wall4 35 19 
+fence 39 19 
+fence 0 20 
+wall3 23 20 
+wall4 25 20 
+wall3 30 20 
+fence 39 20 
+fence 0 21 
+wall4 25 21 
+wall3 30 21 
+fence 39 21 
+fence 0 22 
+fence 1 22 
+fence 2 22 
+fence 3 22 
+fence 4 22 
+fence 5 22 
+fence 6 22 
+fence 7 22 
+fence 8 22 
+fence 9 22 
+fence 10 22 
+fence 11 22 
+fence 12 22 
+fence 13 22 
+fence 14 22 
+fence 15 22 
+fence 16 22 
+fence 17 22 
+fence 18 22 
+fence 19 22 
+fence 20 22 
+fence 21 22 
+fence 22 22 
+fence 23 22 
+fence 24 22 
+fence 25 22 
+fence 26 22 
+fence 27 22 
+fence 28 22 
+fence 29 22 
+fence 30 22 
+fence 31 22 
+fence 32 22 
+fence 33 22 
+fence 34 22 
+fence 35 22 
+fence 36 22 
+fence 37 22 
+fence 38 22 
+fence 39 22 

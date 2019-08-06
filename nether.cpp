@@ -6,9 +6,16 @@
 #include "stdio.h"
 #include "math.h"
 
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#include <GLUT/glut.h>
+#else
 #include "GL/gl.h"
 #include "GL/glu.h"
 #include "GL/glut.h"
+#endif
+
 #include "SDL/SDL.h"
 #include "SDL/SDL_mixer.h"
 
@@ -93,7 +100,7 @@ NETHER::NETHER(char *mapname)
 	camera.x=6;
 	camera.y=-6;
 	camera.z=11;
-	if (zoom==0) zoom=2;
+	zoom=2;
 
 	/* Init game: */ 
 	day=0;

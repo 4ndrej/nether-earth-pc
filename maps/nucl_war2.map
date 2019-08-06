@@ -1,0 +1,85 @@
+8
+64
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G H4 H4 G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+
+
+
+factory 0 10.0 nuclear
+factory 0 53.0 nuclear
+factory 4 10.0 nuclear
+factory 4 53.0 nuclear
+factory 0 15.0 nuclear
+factory 0 48.0 nuclear
+factory 4 15.0 chassis
+factory 4 48.0 chassis
+factory 0 20.0 nuclear
+factory 0 43.0 nuclear
+factory 0 32.0 missiles
+factory 5 32.0 phasers
+warbase 0.5 4.0 1
+warbase 0.0 57.0 2
+
+
