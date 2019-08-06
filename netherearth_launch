@@ -1,0 +1,14 @@
+#!/bin/sh
+NE=/usr/share/games/netherearth
+NEL=$HOME/.netherearth
+
+if [ ! -d $NEL ] ; then
+  mkdir $NEL
+  ln -s $NE/netherearth $NEL
+  ln -s $NE/textures $NEL
+  ln -s $NE/sound $NEL
+  ln -s $NE/models $NEL
+  cp -f $NE/{nether.cfg,*.map} $NEL
+fi
+cd $NEL
+exec ./netherearth
