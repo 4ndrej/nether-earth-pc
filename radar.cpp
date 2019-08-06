@@ -71,9 +71,6 @@ void NETHER::draw_radar(void)
 					case T_HOLE:
 							glColor3f(0.0,0.8,0.0);
 							break;
-					case T_LOWBUILDING:
-							glColor3f(0.3f,0.3f,0.3f);
-							break;
 					case T_BUILDING:
 							glColor3f(0.0,0.0,0.0);
 							break;

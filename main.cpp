@@ -26,7 +26,8 @@ int SCREEN_X=640;
 int SCREEN_Y=480;
 
 int COLOUR_DEPTH=32;
-int shadows=1;
+int shadows=0;
+			// modified, shadows should be default off
 int detaillevel=4;
 bool sound=true;
 int up_key=SDLK_q,down_key=SDLK_a,left_key=SDLK_o,right_key=SDLK_p,fire_key=SDLK_SPACE,pause_key=SDLK_F1;
@@ -95,12 +96,21 @@ SDL_Surface *initialization(int flags)
 	    bpp=info->vfmt->BitsPerPixel;
 	} /* if */ 
 
-    SDL_GL_SetAttribute(SDL_GL_RED_SIZE,8);
+// modified
+/*	SDL_GL_SetAttribute(SDL_GL_RED_SIZE,8);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,8);
     SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,8);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,16);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
-	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,1);
+    SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,1);
+*/
+
+    SDL_GL_SetAttribute(SDL_GL_RED_SIZE,5);
+    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,5);
+    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,5);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,8);
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
+    SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,0);
 
     flags=SDL_OPENGL|flags;
 
@@ -268,11 +278,4 @@ int main(int argc, char** argv)
 	return 0;
 }
 
-
-
-
-
-
-
-
-
+

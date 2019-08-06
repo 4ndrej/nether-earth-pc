@@ -1,18 +1,20 @@
-SOURCES = 3dobject-ase.cpp 3dobject.cpp bitmap.cpp bullet.cpp cmc.cpp \
-	construction.cpp enemy_ai.cpp glprintf.cpp main.cpp mainmenu.cpp \
-	maps.cpp menu.cpp myglutaux.cpp nether.cpp nethercycle.cpp \
-	netherdebug.cpp nethersave.cpp particles.cpp piece3dobject.cpp \
-	quaternion.cpp radar.cpp robot_ai.cpp robots.cpp shadow3dobject.cpp \
-	vector.cpp
+# ls *.cpp
+#
+#3dobject-ase.cpp  construction.cpp  maps.cpp         netherdebug.cpp    radar.cpp
+#3dobject.cpp      enemy_ai.cpp      menu.cpp         nethersave.cpp     robot_ai.cpp
+#bitmap.cpp        glprintf.cpp      myglutaux.cpp    particles.cpp      robots.cpp
+#bullet.cpp        main.cpp          nether.cpp       piece3dobject.cpp  shadow3dobject.cpp
+#cmc.cpp           mainmenu.cpp      nethercycle.cpp  quaternion.cpp     vector.cpp
+
+
+SOURCES = 3dobject-ase.cpp 3dobject.cpp cmc.cpp nether.cpp piece3dobject.cpp vector.cpp bitmap.cpp bullet.cpp glprintf.cpp main.cpp mainmenu.cpp maps.cpp menu.cpp myglutaux.cpp nethercycle.cpp netherdebug.cpp nethersave.cpp particles.cpp construction.cpp quaternion.cpp radar.cpp enemy_ai.cpp robot_ai.cpp robots.cpp shadow3dobject.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
-TARGET = nether
-LIBS = -lSDL -lSDL_mixer -lpthread -lGL -lGLU -lglut -L/usr/X11R6/lib
+TARGET = nether_earth
+
+.cpp.o:
+	g++ -c $< -o $@
 
 all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
-	g++ -o $(TARGET) $(OBJECTS) $(LIBS) -I. -I/usr/include
-
-.cpp.o:
-	g++ -o $@ -c $<
-
+	g++ $(OBJECTS) -o $(TARGET) -lGL -lGLU -lglut -lSDL -lSDL_mixer -lpthread

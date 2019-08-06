@@ -110,10 +110,7 @@ void NETHER::AI_precomputations(void)
 		while(l.Iterate(b)) {
 			x=int(b->pos.x/0.5);
 			y=int(b->pos.y/0.5);
-			if (b->type == B_WALL1 || b->type == B_WALL2 || b->type == B_WALL3 || b->type == B_WALL5)
-				fill_zone(discreetmap,map_w*2,T_LOWBUILDING,x,y,2,2);
-			else
-				fill_zone(discreetmap,map_w*2,T_BUILDING,x,y,2,2);
+			fill_zone(discreetmap,map_w*2,T_BUILDING,x,y,2,2);
 		} /* while */ 
 	}
 } /* NETHER::AI_precomputations */ 
@@ -1022,7 +1019,7 @@ int NETHER::AI_program_destroy(int goal,Vector *program_goal,Vector pos,int angl
 						for(k=1;!collided && k<int((persistence*BULLET_SPEED)/0.5);k++) {
 							if (x+i+k<0 || x+i+k>=map_w*2 ||
 								y+j<0 || y+j>=map_h*2 ||
-								AI_isbulletproof((y+j)*(map_w*2)+(x+i+k))) {
+								discreetmap[(y+j)*(map_w*2)+(x+i+k)]>3) {
 								collided=true;
 							} else {
 								atackmap[(y+j)*(map_w*2)+(x+i+k)]|=4;
@@ -1033,7 +1030,7 @@ int NETHER::AI_program_destroy(int goal,Vector *program_goal,Vector pos,int angl
 						for(k=1;!collided && k<int((persistence*BULLET_SPEED)/0.5);k++) {
 							if (x+i-k<0 || x+i-k>=map_w*2 ||
 								y+j<0 || y+j>=map_h*2 ||
-								AI_isbulletproof((y+j)*(map_w*2)+(x+i-k))) {
+								discreetmap[(y+j)*(map_w*2)+(x+i-k)]>3) {
 								collided=true;
 							} else {
 								atackmap[(y+j)*(map_w*2)+(x+i-k)]|=1;
@@ -1044,7 +1041,7 @@ int NETHER::AI_program_destroy(int goal,Vector *program_goal,Vector pos,int angl
 						for(k=1;!collided && k<int((persistence*BULLET_SPEED)/0.5);k++) {
 							if (x+i<0 || x+i>=map_w*2 ||
 								y+j+k<0 || y+j+k>=map_h*2 ||
-								AI_isbulletproof((y+j+k)*(map_w*2)+(x+i))) {
+								discreetmap[(y+j+k)*(map_w*2)+(x+i)]>3) {
 								collided=true;
 							} else {
 								atackmap[(y+j+k)*(map_w*2)+(x+i)]|=8;
@@ -1055,7 +1052,7 @@ int NETHER::AI_program_destroy(int goal,Vector *program_goal,Vector pos,int angl
 						for(k=1;!collided && k<int((persistence*BULLET_SPEED)/0.5);k++) {
 							if (x+i<0 || x+i>=map_w*2 ||
 								y+j-k<0 || y+j-k>=map_h*2 ||
-								AI_isbulletproof((y+j-k)*(map_w*2)+(x+i))) {
+								discreetmap[(y+j-k)*(map_w*2)+(x+i)]>3) {
 								collided=true;
 							} else {
 								atackmap[(y+j-k)*(map_w*2)+(x+i)]|=2;
@@ -1177,7 +1174,7 @@ int NETHER::AI_program_stopdefend(Vector *program_goal,Vector pos,int angle,int 
 					for(k=1;!collided && k<int((persistence*BULLET_SPEED)/0.5);k++) {
 						if (x+i+k<0 || x+i+k>=map_w*2 ||
 							y+j<0 || y+j>=map_h*2 ||
-							AI_isbulletproof((y+j)*(map_w*2)+(x+i+k))) {
+							discreetmap[(y+j)*(map_w*2)+(x+i+k)]>3) {
 							collided=true;
 						} else {
 							atackmap[(y+j)*(map_w*2)+(x+i+k)]|=4;
@@ -1188,7 +1185,7 @@ int NETHER::AI_program_stopdefend(Vector *program_goal,Vector pos,int angle,int 
 					for(k=1;!collided && k<int((persistence*BULLET_SPEED)/0.5);k++) {
 						if (x+i-k<0 || x+i-k>=map_w*2 ||
 							y+j<0 || y+j>=map_h*2 ||
-							AI_isbulletproof((y+j)*(map_w*2)+(x+i-k))) {
+							discreetmap[(y+j)*(map_w*2)+(x+i-k)]>3) {
 							collided=true;
 						} else {
 							atackmap[(y+j)*(map_w*2)+(x+i-k)]|=1;
@@ -1199,7 +1196,7 @@ int NETHER::AI_program_stopdefend(Vector *program_goal,Vector pos,int angle,int 
 					for(k=1;!collided && k<int((persistence*BULLET_SPEED)/0.5);k++) {
 						if (x+i<0 || x+i>=map_w*2 ||
 							y+j+k<0 || y+j+k>=map_h*2 ||
-							AI_isbulletproof((y+j+k)*(map_w*2)+(x+i))) {
+							discreetmap[(y+j+k)*(map_w*2)+(x+i)]>3) {
 							collided=true;
 						} else {
 							atackmap[(y+j+k)*(map_w*2)+(x+i)]|=8;
@@ -1210,7 +1207,7 @@ int NETHER::AI_program_stopdefend(Vector *program_goal,Vector pos,int angle,int 
 					for(k=1;!collided && k<int((persistence*BULLET_SPEED)/0.5);k++) {
 						if (x+i<0 || x+i>=map_w*2 ||
 							y+j-k<0 || y+j-k>=map_h*2 ||
-							AI_isbulletproof((y+j-k)*(map_w*2)+(x+i))) {
+							discreetmap[(y+j-k)*(map_w*2)+(x+i)]>3) {
 							collided=true;
 						} else {
 							atackmap[(y+j-k)*(map_w*2)+(x+i)]|=2;
@@ -1284,35 +1281,6 @@ int NETHER::AI_program_stopdefend(Vector *program_goal,Vector pos,int angle,int 
 	return op;
 } /* NETHER::AI_program_stopdefend */ 
 
-bool NETHER::AI_isbulletproof(int discreetmappos)
-{
-	switch(discreetmap[discreetmappos])
-	{
-	case T_GRASS:
-		return false;
-	case T_SAND:
-		return false;
-	case T_MOUNTAINS:
-		return false;
-	case T_HOLE:
-		return false;
-	case T_LOWBUILDING:
-		return false;
-	case T_BUILDING:
-		return true;
-	case T_SHIP:
-		return false;
-	case T_ROBOT:
-		return true;
-	case T_EROBOT:
-		return true;
-	case T_OUT:
-		return true;
-	default:
-		return true;
-	}
-	//return (discreetmap[discreetmappos]>3 && discreetmap[discreetmappos]!=9);
-} /* NETHER::AI_isbulletproof */
 
 void NETHER::AI_rankoperators_advance(List<AI_OPERATOR> *l)
 {

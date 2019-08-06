@@ -635,4 +635,3 @@ void C3DObject::refresh_display_lists(void)
 } /* C3DObject::refresh_display_lists */ 
 
 
-
