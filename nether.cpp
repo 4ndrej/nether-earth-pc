@@ -4,7 +4,6 @@
 
 #include "string.h"
 #include "stdio.h"
-#include "stdlib.h"
 #include "math.h"
 
 #include "GL/gl.h"
@@ -94,7 +93,7 @@ NETHER::NETHER(char *mapname)
 	camera.x=6;
 	camera.y=-6;
 	camera.z=11;
-	zoom=1;
+	if (zoom==0) zoom=2;
 
 	/* Init game: */ 
 	day=0;

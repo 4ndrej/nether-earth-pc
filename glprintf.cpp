@@ -5,7 +5,6 @@
 
 #include "stdio.h"
 #include "stdarg.h"
-#include "string.h"
 #include "GL/gl.h"
 #include "GL/glut.h"
 

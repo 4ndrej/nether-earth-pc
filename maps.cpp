@@ -3,7 +3,6 @@
 #endif
 
 #include "stdio.h"
-#include "string.h"
 
 #include "GL/gl.h"
 #include "GL/glu.h"
@@ -377,10 +376,10 @@ void NETHER::drawmap(bool shadows)
 						 } /* if */ 
 						 if (b->owner==2) {
 							if (!shadows) {
-								glTranslatef(0,-1,1);
+								glTranslatef(0,1,1);
 								building_tile[6]->draw(0.8f,0.3f,0.3f);
 							} else {
-								glTranslatef(float(-light.x),float(-light.y)-1,0.05f);
+								glTranslatef(float(-light.x),float(-light.y)+1,0.05f);
 								building_tile[6]->DrawShadow(0,0,0,0.5);
 							} /* if */ 
 						 } /* if */ 
@@ -413,10 +412,10 @@ void NETHER::drawmap(bool shadows)
 						 } /* if */ 
 						 if (b->owner==2) {
 							if (!shadows) {
-								glTranslatef(0,-1,1);
+								glTranslatef(0,1,1);
 								building_tile[6]->draw(0.8f,0.3f,0.3f);
 							} else {
-								glTranslatef(float(-light.x),float(-light.y)-1,0.05f);
+								glTranslatef(float(-light.x),float(-light.y)+1,0.05f);
 								building_tile[6]->DrawShadow(0,0,0,0.5);
 							} /* if */ 
 						 } /* if */ 
@@ -449,10 +448,10 @@ void NETHER::drawmap(bool shadows)
 						 } /* if */ 
 						 if (b->owner==2) {
 							if (!shadows) {
-								glTranslatef(0,-1,1);
+								glTranslatef(0,1,1);
 								building_tile[6]->draw(0.8f,0.3f,0.3f);
 							} else {
-								glTranslatef(float(-light.x),float(-light.y)-1,0.05f);
+								glTranslatef(float(-light.x),float(-light.y)+1,0.05f);
 								building_tile[6]->DrawShadow(0,0,0,0.5);
 							} /* if */ 
 						 } /* if */ 
@@ -485,10 +484,10 @@ void NETHER::drawmap(bool shadows)
 						 } /* if */ 
 						 if (b->owner==2) {
 							if (!shadows) {
-								glTranslatef(0,-1,1);
+								glTranslatef(0,1,1);
 								building_tile[6]->draw(0.8f,0.3f,0.3f);
 							} else {
-								glTranslatef(float(-light.x),float(-light.y)-1,0.05f);
+								glTranslatef(float(-light.x),float(-light.y)+1,0.05f);
 								building_tile[6]->DrawShadow(0,0,0,0.5);
 							} /* if */ 
 						 } /* if */ 
@@ -521,10 +520,10 @@ void NETHER::drawmap(bool shadows)
 						 } /* if */ 
 						 if (b->owner==2) {
 							if (!shadows) {
-								glTranslatef(0,-1,1);
+								glTranslatef(0,1,1);
 								building_tile[6]->draw(0.8f,0.3f,0.3f);
 							} else {
-								glTranslatef(float(-light.x),float(-light.y)-1,0.05f);
+								glTranslatef(float(-light.x),float(-light.y)+1,0.05f);
 								building_tile[6]->DrawShadow(0,0,0,0.5);
 							} /* if */ 
 						 } /* if */ 
@@ -557,10 +556,10 @@ void NETHER::drawmap(bool shadows)
 						 } /* if */ 
 						 if (b->owner==2) {
 							if (!shadows) {
-								glTranslatef(0,-1,1);
+								glTranslatef(0,1,1);
 								building_tile[6]->draw(0.8f,0.3f,0.3f);
 							} else {
-								glTranslatef(float(-light.x),float(-light.y)-1,0.05f);
+								glTranslatef(float(-light.x),float(-light.y)+1,0.05f);
 								building_tile[6]->DrawShadow(0,0,0,0.5);
 							} /* if */ 
 						 } /* if */ 
@@ -585,10 +584,10 @@ void NETHER::drawmap(bool shadows)
 						   } /* if */ 
 						   if (b->owner==2) {
 							  if (!shadows) {
-								 glTranslatef(0,-2,1);
+								 glTranslatef(0,2,1);
 								 building_tile[6]->draw(0.8f,0.3f,0.3f);
 							  } else {
-								 glTranslatef(float(-light.x),float(-light.y)-2,0.05f);
+								 glTranslatef(float(-light.x),float(-light.y)+2,0.05f);
 								 building_tile[6]->DrawShadow(0,0,0,0.5);
 							  } /* if */ 
 						   } /* if */ 

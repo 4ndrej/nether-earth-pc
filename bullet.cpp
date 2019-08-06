@@ -217,19 +217,19 @@ bool NETHER::BulletCollision(BULLET *bullet,ROBOT **r)
 					if (bullet->cmc.collision_simple(m1,&(building_tile[5]->cmc),m2)) return true;
 					break;
 				case B_WALL1:
-					if (bullet->cmc.collision_simple(m1,&(building_tile[0]->cmc),m2)) return true;
+					//if (bullet->cmc.collision_simple(m1,&(building_tile[0]->cmc),m2)) return true;
 					break;
 				case B_WALL2:
-					if (bullet->cmc.collision_simple(m1,&(building_tile[1]->cmc),m2)) return true;
+					//if (bullet->cmc.collision_simple(m1,&(building_tile[1]->cmc),m2)) return true;
 					break;
 				case B_WALL3:
-					if (bullet->cmc.collision_simple(m1,&(building_tile[2]->cmc),m2)) return true;
+					//if (bullet->cmc.collision_simple(m1,&(building_tile[2]->cmc),m2)) return true;
 					break;
 				case B_WALL4:
 					if (bullet->cmc.collision_simple(m1,&(building_tile[3]->cmc),m2)) return true;
 					break;
 				case B_WALL5:
-					if (bullet->cmc.collision_simple(m1,&(building_tile[4]->cmc),m2)) return true;
+					//if (bullet->cmc.collision_simple(m1,&(building_tile[4]->cmc),m2)) return true;
 					break;
 				case B_WALL6:
 					if (bullet->cmc.collision_simple(m1,&(building_tile[7]->cmc),m2)) return true;
