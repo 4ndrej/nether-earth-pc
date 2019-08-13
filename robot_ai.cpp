@@ -50,6 +50,8 @@ const int yd3[4]={ 0, 1, 0, 1};
 const int dangle[4]={0,90,180,270};
 
 
+extern FILE *debug_fp;
+
 void robot_zone(Vector pos,int *x,int *y,int *dx,int *dy)
 {
 	*x=int((pos.x-0.5)/0.5);
@@ -312,6 +314,11 @@ int NETHER::AI_searchengine(Vector pos,int angle,int goaltype,Vector goalpos,int
 	int offs;
 	int x,y,dx,dy;
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Expanding de search tree\n");
+	fflush(debug_fp);
+#endif
+
 	/* Expand the search tree: */ 
 	robot_zone(pos,&x,&y,&dx,&dy);
 
@@ -324,6 +331,11 @@ int NETHER::AI_searchengine(Vector pos,int angle,int goaltype,Vector goalpos,int
 	searchmap[offs]->newpos=pos;
 	searchmap[offs]->deadend=false;
 	AI_expandoperators(x,y,angle,traction,y*(map_w*2)+x,0,depth);
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Expanding de search tree finished\n");
+	fflush(debug_fp);
+#endif
 
 
 	/* ADVANCE PROGRAM: */ 
@@ -440,6 +452,11 @@ int NETHER::AI_searchengine(Vector pos,int angle,int goaltype,Vector goalpos,int
 		bool first=true;
 		AI_OPERATOR *op,*bestop=0;
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Search engine for CAPTURE START\n");
+	fflush(debug_fp);
+#endif
+
 		for(i=-depth;i<depth;i++) {
 			for(j=-depth;j<depth;j++) {
 				if ((x+i)>=0 && (x+i)<(map_w*2) &&
@@ -461,6 +478,11 @@ int NETHER::AI_searchengine(Vector pos,int angle,int goaltype,Vector goalpos,int
 				} /* if */ 
 			} /* for */ 
 		} /* for */ 
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Search engine for CAPTURE FINISHED\n");
+	fflush(debug_fp);
+#endif
 
 		if (bestop!=0) {
 			int rop;
@@ -683,16 +705,31 @@ int NETHER::AI_program_capture(int goal,Vector *program_goal,Vector pos,int angl
 	int type;
 	List<AI_OPERATOR> l;
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"AI_program_capture START\n");
+	fflush(debug_fp);
+#endif
+
 	op=AI_program_stopdefend(program_goal,pos,angle,traction,electronics,player,pieces);
 	if (op!=ROBOTOP_NONE) return op;
 
 	type=AI_killrobot(pos);
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Searching available operators\n");
+	fflush(debug_fp);
+#endif
 
 	AI_availableoperators(pos,angle,traction,&l);
 
 	if (!l.EmptyP()) {
 		/* Choose one operator: */ 
 		AI_OPERATOR *aiop;
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Seeking a goal\n");
+	fflush(debug_fp);
+#endif
 
 		{
 			/* Seek a goal: */ 
@@ -749,6 +786,11 @@ int NETHER::AI_program_capture(int goal,Vector *program_goal,Vector pos,int angl
 			} /* while */ 
 		} 
 
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Searhing a plan to reach the goal\n");
+	fflush(debug_fp);
+#endif
+
 		if (program_goal->x!=-1 &&
 			(*program_goal)!=pos) {
 			if (electronics) {
@@ -768,6 +810,11 @@ int NETHER::AI_program_capture(int goal,Vector *program_goal,Vector pos,int angl
 	/* Reconstruct the decreet map: */ 
 	if (type==T_ROBOT) AI_newrobot(pos,0);
 				  else AI_newrobot(pos,1);
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"AI_program_capture FINISHED\n");
+	fflush(debug_fp);
+#endif
 
 	return op;
 } /* NETHER::AI_program_capture */ 
@@ -1302,6 +1349,19 @@ void NETHER::AI_rankoperators_capture(List<AI_OPERATOR> *l,Vector goal)
 	AI_OPERATOR *op1,*op2;
 	LLink<AI_OPERATOR> *p1,*p2;
 	bool changes;
+	float dist1 = 0;
+	float dist2 = 0;
+	int c1,c2;
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Rank operators START\n");
+	fflush(debug_fp);
+#endif
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Rank operators START\n");
+	fflush(debug_fp);
+#endif
 	
 	/* Bubble sort: */ 
 	do {
@@ -1314,12 +1374,18 @@ void NETHER::AI_rankoperators_capture(List<AI_OPERATOR> *l,Vector goal)
 			if (p1!=0 && p2!=0) {
 				op1=p1->GetObj();
 				op2=p2->GetObj();
-				float dist1 = (op1->newpos-goal).norma();
-				float dist2 = (op2->newpos-goal).norma();
-				float cost1 = op1->cost;
-				float cost2 = op2->cost;
-				if ((dist2<dist1) ||
-					(dist2==dist1 && cost2<cost1)) {
+				dist1 = (op1->newpos-goal).norma();
+				dist2 = (op2->newpos-goal).norma();
+				c1=(0.1)<(dist1-dist2);
+				c2=0;
+				if ((0.1)>(dist1-dist2) &&
+					(-0.1)<(dist1-dist2)) c2=op2->cost<op1->cost;
+				if (c1 || c2) {
+
+#ifdef _WRITE_REPORT_
+		fprintf(debug_fp,"Change: (%.16f,%i) <> (%.16f,%i) %i %i\n",dist1,op1->cost,dist2,op2->cost,c1,c2);
+		fflush(debug_fp);
+#endif
 					p1->Setobj(op2);
 					p2->Setobj(op1);
 					changes=true;
@@ -1328,6 +1394,12 @@ void NETHER::AI_rankoperators_capture(List<AI_OPERATOR> *l,Vector goal)
 			l->Next();
 		} /* while */ 
 	}while(changes);
+
+#ifdef _WRITE_REPORT_
+	fprintf(debug_fp,"Rank operators FINISHED\n");
+	fflush(debug_fp);
+#endif
+
 } /* NETHER::AI_rankoperators_capture */ 
 
 

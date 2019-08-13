@@ -7,4 +7,3 @@ void scaledglprintf2(float sx,float sy,const char *fmt, ...);	/* left alignment 
 void fittedglprintf(float sx,float sy,const char *fmt, ...);
 
 #endif
-

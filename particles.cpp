@@ -117,4 +117,3 @@ bool NETHER::CycleParticle(PARTICLE *p)
 	if (p->acttime>=p->lifetime) return false;
 	return true;
 } /* NETHER::CyclePArticle */ 
-

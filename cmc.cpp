@@ -737,4 +737,3 @@ bool CMC::save(FILE *fp)
 
 	return true;
 } /* CMC::save */ 
-

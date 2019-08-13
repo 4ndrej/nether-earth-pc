@@ -45,13 +45,15 @@ char *strupr(char *in)
 
 extern int SCREEN_X;
 extern int SCREEN_Y;
+extern int COLOUR_DEPTH;
 extern bool fullscreen;
-extern bool shadows;
+extern int shadows;
 extern int detaillevel;
 extern bool sound;
 extern int level;
 extern int up_key,down_key,left_key,right_key,fire_key,pause_key;
 extern char mapname[128];
+extern bool show_radar;
 List<char> mapnames;
 
 extern int mainmenu_status;
@@ -103,7 +105,7 @@ int mainmenu_cycle(int width,int height)
 				WIN32_FIND_DATA finfo;
 				HANDLE h;
 
-				h=FindFirstFile("*.map",&finfo);
+				h=FindFirstFile("maps/*.map",&finfo);
 				if (h!=INVALID_HANDLE_VALUE) {
 					if (strcmp(finfo.cFileName,".")!=0 &&
 						strcmp(finfo.cFileName,"..")!=0) {
@@ -129,7 +131,7 @@ int mainmenu_cycle(int width,int height)
 				DIR *dp;
 				struct dirent *ep;
 				  
-				dp = opendir ("./");
+				dp = opendir ("./maps/");
 				if (dp != NULL)
 				 {
 				    while (ep = readdir (dp))
@@ -202,32 +204,51 @@ int mainmenu_cycle(int width,int height)
 			save_configuration();
 		} /* if */ 
 		if (keyboard[SDLK_2] && !old_keyboard[SDLK_2]) {
+			switch(COLOUR_DEPTH) {
+			case 8:COLOUR_DEPTH=16;
+				break;
+			case 16:COLOUR_DEPTH=24;
+				break;
+			case 24:COLOUR_DEPTH=32;
+				break;
+			default:
+				COLOUR_DEPTH=8;
+			} /* switch */ 
+			retval=3;
+			save_configuration();
+		} /* if */ 
+		if (keyboard[SDLK_3] && !old_keyboard[SDLK_3]) {
 			if (fullscreen) fullscreen=false;
 					   else fullscreen=true;
 			retval=3;
 			save_configuration();
 		} /* if */ 
-		if (keyboard[SDLK_3] && !old_keyboard[SDLK_3]) {
-			if (shadows) shadows=false;
-					else shadows=true;
+		if (keyboard[SDLK_4] && !old_keyboard[SDLK_4]) {
+			shadows++;
+			if (shadows>=3) shadows=0;
 			save_configuration();
 		} /* if */ 
-		if (keyboard[SDLK_4] && !old_keyboard[SDLK_4]) {
+		if (keyboard[SDLK_5] && !old_keyboard[SDLK_5]) {
 			detaillevel++;
 			if (detaillevel>=5) detaillevel=0;
 			save_configuration();
 		} /* if */ 
-		if (keyboard[SDLK_5] && !old_keyboard[SDLK_5]) {
+		if (keyboard[SDLK_6] && !old_keyboard[SDLK_6]) {
 			if (sound) sound=false;
 				  else sound=true;
 			save_configuration();
 		} /* if */ 
-		if (keyboard[SDLK_6] && !old_keyboard[SDLK_6]) {
+		if (keyboard[SDLK_7] && !old_keyboard[SDLK_7]) {
 			level++;
 			if (level>=4) level=0;
 			save_configuration();
 		} /* if */ 
-		if (keyboard[SDLK_7] && !old_keyboard[SDLK_7]) {
+		if (keyboard[SDLK_8] && !old_keyboard[SDLK_8]) {
+			if (show_radar) show_radar=false;
+					   else show_radar=true;
+			save_configuration();
+		} /* if */ 
+		if (keyboard[SDLK_9] && !old_keyboard[SDLK_9]) {
 			mainmenu_status=0;
 			mainmenu_substatus=0;
 		} /* if */ 
@@ -363,34 +384,43 @@ void mainmenu_draw(int width,int height)
 		break;
 	case 3:
 		glColor3f(0.5,0.5,1.0);
-		glTranslatef(0,3,0);
+		glTranslatef(0,3.5,0);
 		if (SCREEN_X== 320) scaledglprintf(0.005,0.005,"1 - RESOLUTION:  320x240");
 		if (SCREEN_X== 400) scaledglprintf(0.005,0.005,"1 - RESOLUTION:  400x300");
 		if (SCREEN_X== 640) scaledglprintf(0.005,0.005,"1 - RESOLUTION:  640x480");
 		if (SCREEN_X== 800) scaledglprintf(0.005,0.005,"1 - RESOLUTION:  800x600");
 		if (SCREEN_X==1024) scaledglprintf(0.005,0.005,"1 - RESOLUTION: 1024x768");
 		glTranslatef(0,-1,0);
-		if (fullscreen) scaledglprintf(0.005,0.005,"2 - FULLSCREEN          ");
-				   else scaledglprintf(0.005,0.005,"2 - WINDOWED            ");
+		if (COLOUR_DEPTH== 8) scaledglprintf(0.005,0.005,"2 - COLOR DEPTH:  8bit  ");
+		if (COLOUR_DEPTH==16) scaledglprintf(0.005,0.005,"2 - COLOR DEPTH: 16bit  ");
+		if (COLOUR_DEPTH==24) scaledglprintf(0.005,0.005,"2 - COLOR DEPTH: 24bit  ");
+		if (COLOUR_DEPTH==32) scaledglprintf(0.005,0.005,"2 - COLOR DEPTH: 32bit  ");
 		glTranslatef(0,-1,0);
-		if (shadows) scaledglprintf(0.005,0.005,"3 - SHADOWS: ON         ");
-				else scaledglprintf(0.005,0.005,"3 - SHADOWS: OFF        ");
+		if (fullscreen) scaledglprintf(0.005,0.005,"3 - FULLSCREEN          ");
+				   else scaledglprintf(0.005,0.005,"3 - WINDOWED            ");
 		glTranslatef(0,-1,0);
-		if (detaillevel==0) scaledglprintf(0.005,0.005,"4 - DETAIL: LOWEST      ");
-		if (detaillevel==1) scaledglprintf(0.005,0.005,"4 - DETAIL: LOW         ");
-		if (detaillevel==2) scaledglprintf(0.005,0.005,"4 - DETAIL: MEDIUM      ");
-		if (detaillevel==3) scaledglprintf(0.005,0.005,"4 - DETAIL: HIGH        ");
-		if (detaillevel==4) scaledglprintf(0.005,0.005,"4 - DETAIL: HIGHEST     ");
+		if (shadows==0) scaledglprintf(0.005,0.005,"4 - SHADOWS: OFF        ");
+		if (shadows==1) scaledglprintf(0.005,0.005,"4 - SHADOWS: ON - DIAG  ");
+		if (shadows==2) scaledglprintf(0.005,0.005,"4 - SHADOWS: ON - VERT  ");
 		glTranslatef(0,-1,0);
-		if (sound) scaledglprintf(0.005,0.005,"5 - SOUND: ON           ");
-			  else scaledglprintf(0.005,0.005,"5 - SOUND: OFF          ");
+		if (detaillevel==0) scaledglprintf(0.005,0.005,"5 - DETAIL: LOWEST      ");
+		if (detaillevel==1) scaledglprintf(0.005,0.005,"5 - DETAIL: LOW         ");
+		if (detaillevel==2) scaledglprintf(0.005,0.005,"5 - DETAIL: MEDIUM      ");
+		if (detaillevel==3) scaledglprintf(0.005,0.005,"5 - DETAIL: HIGH        ");
+		if (detaillevel==4) scaledglprintf(0.005,0.005,"5 - DETAIL: HIGHEST     ");
 		glTranslatef(0,-1,0);
-		if (level==0) scaledglprintf(0.005,0.005,"6 - LEVEL: EASY         ");
-		if (level==1) scaledglprintf(0.005,0.005,"6 - LEVEL: NORMAL       ");
-		if (level==2) scaledglprintf(0.005,0.005,"6 - LEVEL: HARD         ");
-		if (level==3) scaledglprintf(0.005,0.005,"6 - LEVEL: IMPOSSIBLE   ");
+		if (sound) scaledglprintf(0.005,0.005,"6 - SOUND: ON           ");
+			  else scaledglprintf(0.005,0.005,"6 - SOUND: OFF          ");
 		glTranslatef(0,-1,0);
-		scaledglprintf(0.005,0.005,"7 - BACK                ");
+		if (level==0) scaledglprintf(0.005,0.005,"7 - LEVEL: EASY         ");
+		if (level==1) scaledglprintf(0.005,0.005,"7 - LEVEL: NORMAL       ");
+		if (level==2) scaledglprintf(0.005,0.005,"7 - LEVEL: HARD         ");
+		if (level==3) scaledglprintf(0.005,0.005,"7 - LEVEL: IMPOSSIBLE   ");
+		glTranslatef(0,-1,0);
+		if (show_radar) scaledglprintf(0.005,0.005,"8 - RADAR: ON           ");
+				   else scaledglprintf(0.005,0.005,"8 - RADAR: OFF          ");
+		glTranslatef(0,-1,0);
+		scaledglprintf(0.005,0.005,"9 - BACK                ");
 		break;
 	case 7:
 		{
@@ -461,9 +491,7 @@ void load_configuration(void)
 	if (1!=fscanf(fp,"%i",&v)) return;
 	if (v==0) fullscreen=true;
 		 else fullscreen=false;
-	if (1!=fscanf(fp,"%i",&v)) return;
-	if (v==0) shadows=true;
-		 else shadows=false;
+	if (1!=fscanf(fp,"%i",&shadows)) return;
 	if (1!=fscanf(fp,"%i",&detaillevel)) return;
 
 	if (6!=fscanf(fp,"%i %i %i %i %i %i",&up_key,&down_key,&left_key,&right_key,&fire_key,&pause_key)) return;
@@ -487,7 +515,7 @@ void save_configuration(void)
 	if (fp==0) return;
 
 	fprintf(fp,"%i %i\n",SCREEN_X,SCREEN_Y);
-	fprintf(fp,"%i %i %i\n",(fullscreen ? 0 : 1),(shadows ? 0 : 1),detaillevel);
+	fprintf(fp,"%i %i %i\n",(fullscreen ? 0 : 1),shadows,detaillevel);
 	fprintf(fp,"%i %i %i %i %i %i\n",up_key,down_key,left_key,right_key,fire_key,pause_key);
 	fprintf(fp,"%i\n",(sound ? 0 : 1));
 	fprintf(fp,"%i\n",level);
@@ -495,4 +523,3 @@ void save_configuration(void)
 
 	fclose(fp);
 } /* save_configuration */ 
-

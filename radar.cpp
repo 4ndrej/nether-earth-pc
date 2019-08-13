@@ -56,7 +56,8 @@ void NETHER::draw_radar(void)
 		for(y=0;y<maxy;y++) {
 			for(x=0;x<maxx;x++) {
 				if (x+startx<(map_w*2) &&
-					y+starty<(map_h*2)) {
+					y+starty<(map_h*2) &&
+					discreetmap!=0) {
 					switch(discreetmap[x+startx+(y+starty)*(map_w*2)]) {
 					case T_GRASS: 
 							glColor3f(0.0,1.0,0.0);
@@ -118,4 +119,3 @@ void NETHER::draw_radar(void)
 
 
 } /* NETHER::draw_radar */ 
-

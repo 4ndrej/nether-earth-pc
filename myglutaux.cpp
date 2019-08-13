@@ -6,6 +6,8 @@
 #include "GL/glut.h"
 
 #include "stdio.h"
+#include "string.h"
+#include "stdlib.h"
 #include "math.h"
 #include "vector.h"
 #include "cmc.h"
@@ -14,8 +16,6 @@
 #include "bitmap.h"
 
 #include "myglutaux.h"
-#include <stdlib.h>	// by packager kuznecov@blok-caf.ru
-#include <string.h>	// by packager kuznecov@blok-caf.ru
 
 
 

@@ -238,4 +238,3 @@ STATUSBUTTON *NETHER::getbutton(int ID)
 
 	return 0;
 } /* getbutton */ 
-

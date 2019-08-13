@@ -25,7 +25,7 @@
 
 
 extern int frames_per_sec;
-extern bool shadows;
+extern int shadows;
 extern bool sound;
 extern int up_key,down_key,left_key,right_key,fire_key;
 

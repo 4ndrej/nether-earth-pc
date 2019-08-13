@@ -26,7 +26,7 @@
 
 extern int frames_per_sec;
 extern bool fullscreen;
-extern bool shadows;
+extern int shadows;
 extern bool sound;
 extern int up_key,down_key,left_key,right_key,fire_key,pause_key;
 extern int level;
@@ -219,6 +219,10 @@ bool NETHER::load_game(char *filename)
 	AI_deleteprecomputations();
 	if (2!=fscanf(fp,"%i %i",&map_w,&map_h)) return false;
 
+	explosions.Delete();
+	buildings.Delete();
+	for(i=0;i<2;i++) robots[i].Delete();
+	bullets.Delete();
 	delete map;
 	map=new int[map_w*map_h];
 	for(i=0;i<map_h;i++) {
@@ -226,8 +230,6 @@ bool NETHER::load_game(char *filename)
 			if (1!=fscanf(fp,"%i",&(map[j+i*map_w]))) return false;
 		} /* for */ 
 	} /* for */ 
-	AI_precomputations();
-
 	if (4!=fscanf(fp,"%f %f %f %f",&(lightpos[0]),&(lightpos[1]),&(lightpos[2]),&(lightpos[3]))) return false;
 	lightposv.load(fp);
 
@@ -252,8 +254,7 @@ bool NETHER::load_game(char *filename)
 	List<EXPLOSION> explosions;
 */ 
 
-	if (1!=fscanf(fp,"%i",&length)) return false;
-	buildings.Delete();
+	if (1!=fscanf(fp,"%i",&length)) return false;	
 	for(k=0;k<length;k++) {
 /*
 		int type;
@@ -268,7 +269,6 @@ bool NETHER::load_game(char *filename)
 	} /* for */ 
 
 	for(i=0;i<2;i++) {
-		robots[i].Delete();
 
 		if (1!=fscanf(fp,"%i",&length)) return false;
 		for(k=0;k<length;k++) {
@@ -310,8 +310,7 @@ bool NETHER::load_game(char *filename)
 		} /* for */ 
 	} /* for */ 
 
-	if (1!=fscanf(fp,"%i",&length)) return false;
-	bullets.Delete();
+	if (1!=fscanf(fp,"%i",&length)) return false;	
 	for(k=0;k<length;k++) {
 /*
 		int type;
@@ -332,8 +331,7 @@ bool NETHER::load_game(char *filename)
 		bullets.Add(bul);
 	} /* while */ 
 
-	if (1!=fscanf(fp,"%i",&length)) return false;
-	explosions.Delete();
+	if (1!=fscanf(fp,"%i",&length)) return false;	
 	for(k=0;k<length;k++) {
 /*
 		Vector pos;
@@ -367,9 +365,9 @@ bool NETHER::load_game(char *filename)
 	int act_menu;
 	int act_button;
 */ 
-	if (1!=fscanf(fp,"%i %i",&act_menu,&act_button)) return false;
+	if (2!=fscanf(fp,"%i %i",&act_menu,&act_button)) return false;
 
 	fclose(fp);
+	AI_precomputations();
 	return true;
 } /* NETHER::load_game */ 
-

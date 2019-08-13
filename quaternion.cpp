@@ -237,4 +237,3 @@ bool Quaternion::operator!=(Quaternion &q)
 
 	return false;
 } /* Quaternion::operator!= */ 
-

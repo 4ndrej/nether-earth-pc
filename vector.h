@@ -36,4 +36,3 @@ public:
 }; /* Vector */ 
 
 #endif
-

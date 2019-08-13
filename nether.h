@@ -1,6 +1,10 @@
 #ifndef NETHER_HEADER
 #define NETHER_HEADER
 
+
+// #define _WRITE_REPORT_
+
+
 #define COLISION_TEST_THRESHOLD	9.0
 #define INTRO_TIME 60
 #define END_TIME 260
@@ -394,4 +398,3 @@ private:
 };
 
 #endif
-

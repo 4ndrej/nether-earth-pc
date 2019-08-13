@@ -3,6 +3,7 @@
 #endif
 
 #include "stdio.h"
+#include "string.h"
 
 #include "GL/gl.h"
 #include "GL/glu.h"
@@ -18,7 +19,6 @@
 #include "nether.h"
 
 #include "glprintf.h"
-#include <string.h>	// by packager kuznecov@blok-caf.ru
 
 extern int detaillevel;
 extern float MINY,MAXY,MINX,MAXX;
@@ -45,7 +45,9 @@ bool NETHER::loadmap(char *file)
 	for(i=0;i<map_w*map_h;i++) {
 		int tile;
 		char tilestr[16];
-		char *tiles[]={"G","S","S2","M","H1","H2","H3","H4","H5","H6","?"};
+		char *tiles[]={"G","S","S2","M","H1",
+			           "H2","H3","H4","H5","H6",
+					   "GG","SS","MM","?"};
 		bool found;
 
 		if (1!=fscanf(fp,"%s",tilestr)) {
@@ -59,6 +61,9 @@ bool NETHER::loadmap(char *file)
 			if (strcmp(tiles[tile],tilestr)==0) found=true;
 			if (!found) tile++;
 		} /* while */ 
+		if (tile==10) tile=0;
+		if (tile==11) tile=1;
+		if (tile==12) tile=3;
 
 		map[i]=tile;
 	} /* for */ 

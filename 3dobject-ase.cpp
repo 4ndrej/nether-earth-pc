@@ -34,7 +34,7 @@ bool C3DObject::loadASE(char *file,char *texturedir)
 	char buffer[256];
 	FILE *fp;
 
-	fp=fopen(file,"r");
+	fp=fopen(file,"r+");
 	if (fp==NULL) return false;
 
 	/* Look for the materials: */ 
@@ -485,4 +485,3 @@ bool readcomment(char *data,FILE *fp)
 
 	return true;
 } /* readcomment */ 
-

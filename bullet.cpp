@@ -342,4 +342,3 @@ EXPLOSION::EXPLOSION(Vector p,int sz)
 	step=0;
 	size=sz;
 } /* NUCLEAR::NUCLEAR */ 
-

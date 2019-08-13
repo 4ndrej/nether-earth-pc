@@ -43,4 +43,3 @@ unsigned int createTexture(char *fname,int x,int y,int sz);
 unsigned int createTexture(char *fname);
 
 #endif
-

@@ -282,4 +282,3 @@ void Piece3DObject::ComputeFixedShadows(Vector light)
 	ComputeShadow(270,light,&shdw_npuntos_270,&shdw_ncaras_270,
 						    &shdw_puntos_270,&shdw_caras_270,&shdw_cmc_270);
 } /* Piece3DObject::ComputeShadow */ 
-
