@@ -1,0 +1,122 @@
+8
+64
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G S S G G G
+G S S S S S S G
+S S S S2 S2 S S S
+S S2 S2 M M S2 S2 S
+S2 M M M M M M S2
+M M M M M M M M
+S2 M M M M M M S2
+S S2 S2 M M S2 S2 S
+S S S S2 S2 S S S
+G S S S S S S G
+G G G S S G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+G G G G G G G G
+
+
+fence 0.0 0.0
+fence 1.0 0.0
+fence 2.0 0.0
+fence 3.0 0.0
+fence 4.0 0.0
+fence 5.0 0.0
+fence 6.0 0.0
+fence 7.0 0.0
+factory 0 10.0 electronics
+factory 4 10.0 chassis
+factory 0 15.0 missiles
+factory 4 15.0 cannons
+factory 0 20.0 phasers
+factory 4 20.0 nuclear
+warbase 0.5 4.0 1
+warbase 0.0 57.0 2
+wall2 5.5 3.5
+
+
+wall2 4.5 43.5
+wall3 6.0 45.0
+wall3 2.0 49.0
+wall3 4.0 49.0
+wall3 1.0 50.0
+wall6 2.0 50.0
+wall6 4.0 50.0
+wall3 5.0 50.0
+wall3 0.0 51.0
+wall6 1.0 51.0
+wall3 2.0 51.0
+wall3 4.0 51.0
+wall6 5.0 51.0
+wall3 6.0 51.0
+wall6 0.0 52.0
+wall3 1.0 52.0
+wall3 2.0 52.0
+wall3 5.0 52.0
+wall6 6.0 52.0
+wall3 7.0 52.0
+wall3 0.0 53.0
+wall6 2.0 53.0
+wall3 6.0 53.0
+wall6 7.0 53.0
+wall3 2.0 54.0
+wall3 7.0 54.0
+
+fence 0.0 63.0
+fence 1.0 63.0
+fence 2.0 63.0
+fence 3.0 63.0
+fence 4.0 63.0
+fence 5.0 63.0
+fence 6.0 63.0
+fence 7.0 63.0

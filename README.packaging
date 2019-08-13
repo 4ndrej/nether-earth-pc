@@ -1,0 +1,5 @@
+Packager: Ilya Kuznecov <kuznecov@blok-caf.ru>
+
+This is my first self-made package.
+I change only: write spec, recode CR-LF to LF, lowercase filenames, add including of <string.h> and <stdlib.h> where required. Source modifications taked from russian NAPILNIK-man from http://linux.org.ru (screenshot session).
+
