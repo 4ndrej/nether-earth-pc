@@ -6,8 +6,6 @@
 #include "GL/glut.h"
 
 #include "stdio.h"
-#include "string.h"
-#include "stdlib.h"
 #include "math.h"
 #include "vector.h"
 #include "cmc.h"

@@ -37,6 +37,10 @@ void NETHER::AI_enemy(void)
 	float distance_to_factories;
 	BUILDING *closest_to_enemy_warbase=0;
 	float distance_to_enemy;
+	BUILDING *less_robots_around_warbase=0;
+	float robot_distance;
+	float robot_distance_sum;
+	float robot_distance_sum_current;
 	int factories[3]={0,0,0};
 
 //	if (fp==0) {
@@ -132,11 +136,14 @@ void NETHER::AI_enemy(void)
 				} /* if */ 
 
 				/* Test for WARBASEs in danger: */ 
+				/* and find the WARBASE with less robots around */
+				robot_distance_sum_current=0;
 				for(i=0;i<2;i++) {
 					rl.Instance(robots[i]);
 					rl.Rewind();
 					while(rl.Iterate(r)) {
-						if ((r->pos-b->pos).norma()<10.0) {
+						robot_distance = (r->pos-b->pos).norma();
+						if (robot_distance<10.0) {
 							/* Robot near: */ 
 							forces[i]+=RobotCost(r);
 
@@ -153,19 +160,26 @@ void NETHER::AI_enemy(void)
 								} /* if */ 
 							} /* if */ 
 						} /* if */ 
+						if (i==1) {
+							robot_distance_sum_current=robot_distance_sum_current+robot_distance;
+						} /* if */
 					} /* while */ 
 				} /* for */ 
 				if (forces[0]>forces[1]) {
 					state=AI_STATE_DEFENDING;
 					in_danger_warbase=b;
 				} /* if */ 
+				if (less_robots_around_warbase==0 || robot_distance_sum_current>robot_distance_sum) {
+					less_robots_around_warbase=b;
+					robot_distance_sum=robot_distance_sum_current;
+				} /* if */
 
 			} /* if */ 
 		} /* while */ 
 	}
 
 
-	/* If the warbase in danger id blocked, build robots from another warbase: */ 
+	/* If the warbase in danger is blocked, build robots from another warbase: */ 
 	if (in_danger_warbase!=0) {
 		tmpr->pos=in_danger_warbase->pos+Vector(2.0,0.5,0);
 		if (RobotCollision(tmpr,true)) in_danger_warbase=closest_to_enemy_warbase;
@@ -272,7 +286,7 @@ void NETHER::AI_enemy(void)
 				break;
 			} /* switch */  
 
-			ROBOT *r=AI_enemy_newrobot(AI_STATE_EXPANDING,closest_to_factories_warbase->pos+Vector(2.5,0.5,0));
+			ROBOT *r=AI_enemy_newrobot(AI_STATE_EXPANDING,less_robots_around_warbase->pos+Vector(2.5,0.5,0));
 //			fprintf(fp,"Trying to BUILD a robot to CONQUER FACTORIES \n");
 			if (r!=0) {
 				if (factories[1]>factories[0]) {			

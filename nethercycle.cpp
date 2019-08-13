@@ -50,11 +50,11 @@ bool NETHER::cycle(unsigned char *keyboard)
 	fflush(debug_fp);
 #endif
 
-	if (keyboard[SDLK_PAGEUP]) {
+	if (keyboard[SDLK_PAGEUP] || keyboard[SDLK_KP_MINUS]) {
 		zoom*=1.1;
-		if (zoom>4) zoom=4;
+		if (zoom>8) zoom=8;
 	} /* if */ 
-	if (keyboard[SDLK_PAGEDOWN]) {
+	if (keyboard[SDLK_PAGEDOWN] || keyboard[SDLK_KP_PLUS]) {
 		zoom/=1.1;
 		if (zoom<0.5) zoom=0.5;
 	} /* if */ 
@@ -221,16 +221,16 @@ bool NETHER::cycle(unsigned char *keyboard)
 				if ((int(shipp.y*8)%4)==0) ship_op2=OP_NONE;
 				if ((int(shipp.z*8)%4)==0) ship_op3=OP_NONE;
 
-				if (keyboard[left_key]) {
+				if (keyboard[up_key]) {
 					ship_op=OP_LEFT;
 				} /* if */ 
-				if (keyboard[right_key]) {
+				if (keyboard[down_key]) {
 					ship_op=OP_RIGHT;
 				} /* if */ 
-				if (keyboard[up_key]) {
+				if (keyboard[right_key]) {
 					ship_op2=OP_FORWARD;
 				} /* if */ 
-				if (keyboard[down_key]) {
+				if (keyboard[left_key]) {
 					ship_op2=OP_BACKWARD;
 				} /* if */ 
 				if (keyboard[fire_key]) {
@@ -513,7 +513,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 
 						killmenu(ORDERS_MENU);
 						newmenu(ROBOT_MENU);
-						act_button=ROBOT2_BUTTON;
+						act_button=ROBOT4_BUTTON;
 						if (S_select!=0 && sound) Mix_Volume(Mix_PlayChannel(-1,S_select,0),128);
 						break;
 					case ORDERS2_BUTTON:
@@ -577,7 +577,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 
 					killmenu(SELECTDISTANCE_MENU);
 					newmenu(ROBOT_MENU);
-					act_button=ROBOT2_BUTTON;
+					act_button=ROBOT4_BUTTON;
 					if (S_select!=0 && sound) Mix_Volume(Mix_PlayChannel(-1,S_select,0),128);
 				} /* if */ 
 			}
@@ -636,7 +636,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 							controlled->pieces[2]) {
 							killmenu(TARGETD_MENU);
 							newmenu(ROBOT_MENU);
-							act_button=ROBOT2_BUTTON;
+							act_button=ROBOT4_BUTTON;
 							controlled->program=PROGRAM_DESTROY;
 							controlled->program_parameter=P_PARAM_ROBOTS;
 							controlled->program_goal=Vector(-1,-1,-1);
@@ -650,7 +650,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 						if (controlled->pieces[3]) {
 							killmenu(TARGETD_MENU);
 							newmenu(ROBOT_MENU);
-							act_button=ROBOT2_BUTTON;
+							act_button=ROBOT4_BUTTON;
 							controlled->program=PROGRAM_DESTROY;
 							controlled->program_parameter=P_PARAM_EFACTORIES;
 							controlled->program_goal=Vector(-1,-1,-1);
@@ -664,7 +664,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 						if (controlled->pieces[3]) {
 							killmenu(TARGETD_MENU);
 							newmenu(ROBOT_MENU);
-							act_button=ROBOT2_BUTTON;
+							act_button=ROBOT4_BUTTON;
 							controlled->program=PROGRAM_DESTROY;
 							controlled->program_parameter=P_PARAM_WARBASES;
 							controlled->program_goal=Vector(-1,-1,-1);
@@ -729,7 +729,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 					case TARGET1_BUTTON:
 						killmenu(TARGETC_MENU);
 						newmenu(ROBOT_MENU);
-						act_button=ROBOT2_BUTTON;
+						act_button=ROBOT4_BUTTON;
 						controlled->program=PROGRAM_CAPTURE;
 						controlled->program_parameter=P_PARAM_NFACTORIES;
 						controlled->program_goal=Vector(-1,-1,-1);
@@ -738,7 +738,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 					case TARGET2_BUTTON:
 						killmenu(TARGETC_MENU);
 						newmenu(ROBOT_MENU);
-						act_button=ROBOT2_BUTTON;
+						act_button=ROBOT4_BUTTON;
 						controlled->program=PROGRAM_CAPTURE;
 						controlled->program_parameter=P_PARAM_EFACTORIES;
 						controlled->program_goal=Vector(-1,-1,-1);
@@ -747,7 +747,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 					case TARGET3_BUTTON:
 						killmenu(TARGETC_MENU);
 						newmenu(ROBOT_MENU);
-						act_button=ROBOT2_BUTTON;
+						act_button=ROBOT4_BUTTON;
 						controlled->program=PROGRAM_CAPTURE;
 						controlled->program_parameter=P_PARAM_WARBASES;
 						controlled->program_goal=Vector(-1,-1,-1);
@@ -862,7 +862,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 				if (b->type==B_WARBASE && b->owner==1 && 
 					shipp.x==b->pos.x && shipp.y==b->pos.y && shiplanded) {
 					game_state=STATE_CONSTRUCTION;
-					construction_pointer=0;
+					construction_pointer=20;
 					construction[0]=false;
 					construction[1]=false;
 					construction[2]=false;
@@ -981,6 +981,8 @@ bool NETHER::cycle(unsigned char *keyboard)
 							if (AI_WorseMapTerrain(int((r->pos.x-0.5)/0.5),int((r->pos.y-1.0)/0.5),2,1)>T_HOLE) r->op=ROBOTOP_NONE;
 							break;
 						} /* switch */ 
+						if (r->op==ROBOTOP_NONE && r->program==PROGRAM_FORWARD)
+							r->program=PROGRAM_STOPDEFEND;
 					} /* if */ 
 
 #ifdef _WRITE_REPORT_
@@ -1212,6 +1214,8 @@ bool NETHER::cycle(unsigned char *keyboard)
 								break;
 							case PROGRAM_FORWARD:
 								r->op=ROBOTOP_FORWARD;
+								r->program_parameter--;
+								if (r->program_parameter==0) r->program=PROGRAM_STOPDEFEND;
 								break;
 							case PROGRAM_STOPDEFEND:
 								r->op=AI_program_stopdefend(&(r->program_goal),r->pos,r->angle,r->traction,r->pieces[4],i+1,r->pieces);
@@ -1247,7 +1251,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 	fprintf(debug_fp,"User command\n",i);
 	fflush(debug_fp);
 #endif
-							if (keyboard[right_key]) {
+							if (keyboard[down_key]) {
 								if (r->angle==0) {
 									r->op=ROBOTOP_FORWARD;
 								} else {
@@ -1255,7 +1259,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 												  else r->op=ROBOTOP_LEFT;
 								} /* if */ 
 							} /* if */ 
-							if (keyboard[left_key]) {
+							if (keyboard[up_key]) {
 								if (r->angle==180) {
 									r->op=ROBOTOP_FORWARD;
 								} else {
@@ -1263,7 +1267,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 												 else r->op=ROBOTOP_LEFT;
 								} /* if */ 
 							} /* if */ 
-							if (keyboard[up_key]) {
+							if (keyboard[right_key]) {
 								if (r->angle==90) {
 									r->op=ROBOTOP_FORWARD;
 								} else {
@@ -1271,7 +1275,7 @@ bool NETHER::cycle(unsigned char *keyboard)
 												else r->op=ROBOTOP_LEFT;
 								} /* if */ 
 							} /* if */ 
-							if (keyboard[down_key]) {
+							if (keyboard[left_key]) {
 								if (r->angle==270) {
 									r->op=ROBOTOP_FORWARD;
 								} else {
