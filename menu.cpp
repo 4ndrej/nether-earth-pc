@@ -5,7 +5,11 @@
 #include "stdio.h"
 #include "string.h"
 
-#include "GL/gl.h"
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#else
+#include <GL/gl.h>
+#endif
 #include "GL/glu.h"
 #include "SDL/SDL.h"
 #include "SDL/SDL_mixer.h"

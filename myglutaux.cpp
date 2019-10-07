@@ -2,10 +2,16 @@
 #include "windows.h"
 #endif
 
-#include <GL/gl.h>
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#include <GLUT/glut.h>
+#else
+#include "GL/gl.h"
 #include "GL/glut.h"
+#endif
 
 #include "stdio.h"
+#include "string.h"
 #include "math.h"
 #include "vector.h"
 #include "cmc.h"
@@ -75,19 +81,26 @@ float draw3Dtext(char *text,float dx,float dy,float dz,float r,float g,float b)
 } /* draw3Dtext */ 
 
 
+int iabs(int v)
+{
+	if (v>=0) return v;
+	return -v;
+}
+
+
 int nearest2pow(int n)
 {
 	int v[]={2,4,8,16,32,64,128,256,512,-1};
 	int better,dif,i;
 
 	better=2;
-	dif=abs(n-v[0]);
+	dif=iabs(n-v[0]);
 
 	i=0;
 	while(v[i]!=-1) {
-		if (abs(n-v[i])<dif) {
+		if (iabs(n-v[i])<dif) {
 			better=v[i];
-			dif=abs(n-v[i]);
+			dif=iabs(n-v[i]);
 		} /* if */ 
 		i++;
 	} /* while */ 
