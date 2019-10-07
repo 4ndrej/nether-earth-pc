@@ -1,0 +1,147 @@
+20
+20
+S2 G G G G G G G G G G G G G G G G G G G 
+S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 S2 M M M M G 
+S2 S2 M M M M M S2 S2 M M M S2 M S2 M M M M G 
+S2 S2 S2 S2 S2 M M M M S2 S2 S2 S2 S2 S2 M M G G G 
+S2 M M M S2 G M M S2 S2 S2 S2 M M S2 M M M G G 
+S2 S2 S2 G G M M M M M M M M S2 S2 M G G G G 
+S2 S2 M M M M M S2 S2 M S2 S2 S2 S2 S2 M G G G G 
+G S2 S2 S2 M M S2 S2 S2 M M M M S2 M M M M G G 
+G S2 S2 S2 M G G S2 S2 S2 M M S2 S2 S2 M G G G G 
+G G M M M M S2 S2 S2 M M M M M M M M M G G 
+G G M S2 S2 S2 S2 S2 S2 M S2 M S2 G G M G G G G 
+G G M M M M S2 S2 S2 S2 S2 M M G G G G G G S2 
+G G G G M S2 M M S2 S2 M M S2 G G G S2 M M G 
+G S2 M G S2 M M M S2 S2 S2 S2 S2 G G G S2 G G G 
+G S2 M S2 M M M S2 S2 G G S2 S2 S2 G M S2 G G G 
+G S2 M S2 M M S2 S2 G G G G S2 S2 M M M M G G 
+G M M S2 M M S2 M M G M M S2 S2 G M M S2 G G 
+G M S2 S2 M S2 S2 M G G M S2 S2 S2 M M M M M G 
+G M M M M M S2 M M G M M S2 G G M G S2 G G 
+G G G G G G G G G S2 S2 S2 S2 G G G G S2 G G 
+fence 0 0 
+fence 1 0 
+fence 2 0 
+fence 3 0 
+fence 4 0 
+fence 5 0 
+fence 6 0 
+fence 7 0 
+fence 8 0 
+fence 9 0 
+fence 10 0 
+fence 11 0 
+fence 12 0 
+fence 13 0 
+fence 14 0 
+fence 15 0 
+fence 16 0 
+fence 17 0 
+fence 18 0 
+fence 19 0 
+fence 0 1 
+warbase 14 1 2
+fence 19 1 
+fence 0 2 
+wall6 2 2 
+wall2 3 2 
+wall2 4 2 
+warbase 5 2 1
+wall2 9 2 
+wall2 10 2 
+wall6 11 2 
+wall2 13 2 
+fence 19 2 
+fence 0 3 
+fence 19 3 
+fence 0 4 
+wall2 1 4 
+wall2 2 4 
+wall6 3 4 
+wall2 12 4 
+wall2 13 4 
+fence 19 4 
+fence 0 5 
+factory 9 5 chassis
+wall2 11 5 
+wall2 12 5 
+fence 19 5 
+fence 0 6 
+wall6 2 6 
+wall2 3 6 
+wall2 4 6 
+warbase 14 6 2
+fence 19 6 
+fence 0 7 
+factory 4 7 electronics
+wall2 11 7 
+wall2 12 7 
+fence 19 7 
+fence 0 8 
+fence 19 8 
+fence 0 9 
+factory 2 9 cannons
+wall6 10 9 
+factory 11 9 chassis
+wall1 13 9 
+fence 19 9 
+fence 0 10 
+wall6 9 10 
+fence 19 10 
+fence 0 11 
+wall2 4 11 
+wall4 5 11 
+fence 19 11 
+fence 0 12 
+wall2 4 12 
+wall6 7 12 
+wall4 10 12 
+wall4 11 12 
+wall3 17 12 
+wall3 18 12 
+fence 19 12 
+fence 0 13 
+wall6 2 13 
+wall6 6 13 
+fence 19 13 
+fence 0 14 
+wall2 2 14 
+wall6 5 14 
+warbase 14 14 2
+fence 19 14 
+fence 0 15 
+wall2 2 15 
+wall6 4 15 
+fence 19 15 
+fence 0 16 
+factory 1 16 phasers
+factory 4 16 missiles
+factory 7 16 electronics
+factory 10 16 missiles
+fence 19 16 
+fence 0 17 
+wall1 18 17 
+fence 19 17 
+fence 0 18 
+fence 19 18 
+fence 0 19 
+fence 1 19 
+fence 2 19 
+fence 3 19 
+fence 4 19 
+fence 5 19 
+fence 6 19 
+fence 7 19 
+fence 8 19 
+fence 9 19 
+fence 10 19 
+fence 11 19 
+fence 12 19 
+fence 13 19 
+fence 14 19 
+fence 15 19 
+fence 16 19 
+fence 17 19 
+fence 18 19 
+fence 19 19 
