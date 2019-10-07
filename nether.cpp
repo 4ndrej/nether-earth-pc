@@ -100,7 +100,7 @@ NETHER::NETHER(char *mapname)
 	camera.x=6;
 	camera.y=-6;
 	camera.z=11;
-	if (zoom==0) zoom=2;
+	zoom=2;
 
 	/* Init game: */ 
 	day=0;
