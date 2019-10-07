@@ -115,7 +115,7 @@ SDL_Surface *initialization(int flags)
 		return 0;
 	} /* if */ 
 
-	SDL_WM_SetCaption("Nether Earth REMAKE v0.51", 0);
+	SDL_WM_SetCaption("Nether Earth REMAKE v0.52", 0);
 	SDL_ShowCursor(SDL_DISABLE);
 
 	return screen;
